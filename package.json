@@ -17,5 +17,19 @@
   "cordovaPlugins": [],
   "cordovaPlatforms": [
     "ios"
-  ]
+  ],
+  "main": "gulpfile.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/SnapMobileIO/StreetView.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/SnapMobileIO/StreetView/issues"
+  },
+  "homepage": "https://github.com/SnapMobileIO/StreetView#readme"
 }
