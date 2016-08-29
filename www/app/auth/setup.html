@@ -1,0 +1,17 @@
+<ion-view view-title="Account Setup">
+  <ion-content>
+  	<div class="list">
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">First Name</span>
+		    <input type="text" placeholder="First Name" ng-model="newUser.firstName">
+		  </label>
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Last Name</span>
+		    <input type="text" placeholder="Last Name" ng-model="newUser.lastName">
+		  </label>
+		  <button class="button button-block button-positive" ng-click="updateUser()" ui-sref="tab.views-map">
+		  Let's Go!
+		</button>
+		</div>
+  </ion-content>
+</ion-view>

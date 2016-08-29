@@ -1,19 +1,19 @@
 var express = require('express');
-var app = express();
-var mongojs = require('mongojs');
-var db = mongojs('viewlist', ['viewlist']);
+var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
-app.use(express.static(__dirname + '/www'));
+var app = express();
+var authentication = require('./server/controllers/auth.service');
+
+mongoose.connect('mongodb://localhost:27017/street-view');
+
 app.use(bodyParser.json());
+app.use(express.static(__dirname + "/www"));
+app.use('/node_modules', express.static(__dirname + "/node_modules"));
 
-app.get('/viewlist', function(req, res) {
-	console.log("I received a GET request");
+// Authentication
+app.post('/api/user/signup', authentication.signup);
 
-	db.viewlist.find(function(err, docs){
-		res.json(docs);
-	});
+app.listen('3000', function() {
+	console.log("Listening for local host 3000");
 });
-
-app.listen(8100);
-console.log("Server running on port 8100");

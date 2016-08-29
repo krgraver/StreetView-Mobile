@@ -5,7 +5,7 @@
 // the 2nd parameter is an array of 'requires'
 // 'starter.services' is found in services.js
 // 'starter.controllers' is found in controllers.js
-angular.module('starter', ['ionic', 'views.controller', 'directory.controller', 'profile.controller'])
+angular.module('app', ['ionic', 'auth.controller', 'view.controller', 'user.controller'])
 
 .run(function($ionicPlatform) {
   $ionicPlatform.ready(function() {
@@ -31,70 +31,71 @@ angular.module('starter', ['ionic', 'views.controller', 'directory.controller', 
   // Each state's controller can be found in controllers.js
   $stateProvider
 
+  // Authentication views
+
+  .state('login', {
+    url: '/login',
+    templateUrl: 'app/auth/login.html',
+    controller: 'AuthenticationController'
+  })
+
+  .state('signup', {
+    url: '/signup',
+    templateUrl: 'app/auth/signup.html',
+    controller: 'AuthenticationController'
+  })
+
+  .state('setup', {
+    url: '/setup',
+    templateUrl: 'app/auth/setup.html',
+    controller: 'AuthenticationController'
+  })
+
   // setup an abstract state for the tabs directive
     .state('tab', {
     url: '/tab',
     abstract: true,
-    templateUrl: 'templates/tabs.html'
+    templateUrl: 'app/nav/tabs.html'
   })
 
   // Each tab has its own nav history stack:
 
-  .state('tab.dash', {
-    url: '/dash',
+  .state('tab.views-map', {
+    url: '/views-map',
     views: {
-      'tab-dash': {
-        templateUrl: 'templates/tab-dash.html',
-        controller: 'DashCtrl'
+      'tab-views-map': {
+        templateUrl: 'app/view/map.html',
+        controller: 'ViewController'
       }
     }
   })
 
-  .state('tab.chats', {
-      url: '/chats',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/tab-chats.html',
-          controller: 'ChatsCtrl'
-        }
-      }
-    })
-    .state('tab.chat-detail', {
-      url: '/chats/:chatId',
-      views: {
-        'tab-chats': {
-          templateUrl: 'templates/chat-detail.html',
-          controller: 'ChatDetailCtrl'
-        }
-      }
-    })
-
-  .state('tab.account', {
-    url: '/account',
+  .state('tab.views-list', {
+    url: '/views-list',
     views: {
-      'tab-account': {
-        templateUrl: 'templates/tab-account.html',
-        controller: 'AccountCtrl'
+      'tab-views-list': {
+        templateUrl: 'app/view/list.html',
+        controller: 'ViewController'
       }
     }
   })
 
-  .state('tab.views', {
-    url: '/views',
+  .state('tab.views-map-new', {
+    url: '/views-map-new',
     views: {
-      'tab-views': {
-        templateUrl: 'templates/tab-views.html',
-        controller: 'ViewsCtrl'
+      'tab-views-map': {
+        templateUrl: 'app/view/map-new.html',
+        controller: 'ViewController'
       }
     }
   })
 
-  .state('tab.directory', {
-    url: '/directory',
+  .state('tab.views-list-new', {
+    url: '/views-list-new',
     views: {
-      'tab-directory': {
-        templateUrl: 'templates/tab-directory.html',
-        controller: 'DirectoryCtrl'
+      'tab-views-list': {
+        templateUrl: 'app/view/list-new.html',
+        controller: 'ViewController'
       }
     }
   })
@@ -103,13 +104,13 @@ angular.module('starter', ['ionic', 'views.controller', 'directory.controller', 
     url: '/profile',
     views: {
       'tab-profile': {
-        templateUrl: 'templates/tab-profile.html',
-        controller: 'ProfileCtrl'
+        templateUrl: 'app/user/profile.html',
+        controller: 'UserController'
       }
     }
   });
 
   // if none of the above states are matched, use this as the fallback
-  $urlRouterProvider.otherwise('/tab/views');
+  $urlRouterProvider.otherwise('/tab/views-map');
 
 });
