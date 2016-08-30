@@ -1,4 +1,4 @@
 angular.module('user.controller', [])
-	.controller('UserController', ['$scope', '$http', function($scope, $http) {
+	.controller('UserController', ['$scope', '$state', '$http', function($scope, $state, $http) {
 
 	}]);

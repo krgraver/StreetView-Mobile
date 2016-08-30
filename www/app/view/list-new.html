@@ -3,6 +3,14 @@
     <a ui-sref="tab.views-list" class="button button-clear">Cancel</a>
   </ion-nav-buttons>
   <ion-content>
-  	<p>This is where you add a view</p>
+  	<div class="list">
+		  <label class="item item-input item-floating-label">
+		    <span class="input-label">Description</span>
+		    <input type="text" placeholder="Description" ng-model="view.description">
+		  </label>
+		</div>
+		<button class="button button-block button-positive" ng-click="uploadView()" ui-sref="tab.views-list">
+		  Submit
+		</button>
   </ion-content>
 </ion-view>

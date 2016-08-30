@@ -45,20 +45,22 @@ angular.module('app', ['ionic', 'auth.controller', 'view.controller', 'user.cont
     controller: 'AuthenticationController'
   })
 
+  // Account Setup
+
   .state('setup', {
     url: '/setup',
-    templateUrl: 'app/auth/setup.html',
-    controller: 'AuthenticationController'
+    templateUrl: 'app/user/setup.html',
+    controller: 'UserController'
   })
 
-  // setup an abstract state for the tabs directive
+  // Tab Navigation Abstract
     .state('tab', {
     url: '/tab',
     abstract: true,
     templateUrl: 'app/nav/tabs.html'
   })
 
-  // Each tab has its own nav history stack:
+  // Tabbed views:
 
   .state('tab.views-map', {
     url: '/views-map',

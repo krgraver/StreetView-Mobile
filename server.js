@@ -4,6 +4,7 @@ var bodyParser = require('body-parser');
 
 var app = express();
 var authentication = require('./server/controllers/auth.service');
+var view = require('./server/controllers/view.service');
 
 mongoose.connect('mongodb://localhost:27017/street-view');
 
@@ -13,6 +14,11 @@ app.use('/node_modules', express.static(__dirname + "/node_modules"));
 
 // Authentication
 app.post('/api/user/signup', authentication.signup);
+app.post('/api/user/login', authentication.login);
+
+//View
+app.post('/api/view/post', view.postView);
+app.get('/api/view/get', view.getViews);
 
 app.listen('3000', function() {
 	console.log("Listening for local host 3000");
