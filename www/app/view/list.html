@@ -1,13 +1,13 @@
 <ion-view view-title="Views List" ng-init="getAllViews()">
   <ion-nav-buttons side="right">
-    <a ui-sref="tab.views-list-new" class="button button-clear">Add View</a>
+    <a class="button button-clear" ui-sref="tab.views-list-new">Add View</a>
   </ion-nav-buttons>
   <ion-content>
     <div class="list">
 	    <a class="item item-thumbnail-left" ng-repeat="view in views">
 <!-- 	      <img src=""> -->
 	      <h2>{{view.description}}</h2>
-	      <p>Uploaded on {{view.date | date: 'MMM d, yyyy'}}</p>
+	      <p>{{view.userFirstName}} {{view.userLastName}} uploaded on {{view.date | date: 'MMM d, yyyy'}}</p>
 	    </a>
 	</div>
   </ion-content>

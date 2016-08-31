@@ -6,10 +6,17 @@ angular.module('view.controller', [])
 			$scope.user = JSON.parse(localStorage['User-Data']);
 		}
 
+		$scope.types = ['Graffiti', 'Painting', 'Sculpture', 'Stencil', 'Other'];
+
+		// Post view to server
+
 		$scope.uploadView = function() {
 			var request = {
 				userId: $scope.user._id,
-				description: $scope.view.description
+				userFirstName: $scope.user.firstName,
+				userLastName: $scope.user.lastName,
+				description: $scope.view.description,
+				artType: $scope.view.artType
 			}
 
 			$http.post('/api/view/post', request).success(function(response) {
@@ -17,7 +24,11 @@ angular.module('view.controller', [])
 			}).error(function(err) {
 				console.error(err);
 			});
+
+			$state.go('tab.views-list');
 		}
+
+		// Show all views in list tab
 
 		$scope.getAllViews = function() {
 			$scope.views = {};

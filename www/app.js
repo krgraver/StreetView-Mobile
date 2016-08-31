@@ -72,21 +72,21 @@ angular.module('app', ['ionic', 'auth.controller', 'view.controller', 'user.cont
     }
   })
 
-  .state('tab.views-list', {
-    url: '/views-list',
-    views: {
-      'tab-views-list': {
-        templateUrl: 'app/view/list.html',
-        controller: 'ViewController'
-      }
-    }
-  })
-
   .state('tab.views-map-new', {
     url: '/views-map-new',
     views: {
       'tab-views-map': {
         templateUrl: 'app/view/map-new.html',
+        controller: 'ViewController'
+      }
+    }
+  })
+
+  .state('tab.views-list', {
+    url: '/views-list',
+    views: {
+      'tab-views-list': {
+        templateUrl: 'app/view/list.html',
         controller: 'ViewController'
       }
     }
@@ -107,6 +107,16 @@ angular.module('app', ['ionic', 'auth.controller', 'view.controller', 'user.cont
     views: {
       'tab-profile': {
         templateUrl: 'app/user/profile.html',
+        controller: 'UserController'
+      }
+    }
+  })
+
+  .state('tab.profile-edit', {
+    url: '/profile-edit',
+    views: {
+      'tab-profile': {
+        templateUrl: 'app/user/profile-edit.html',
         controller: 'UserController'
       }
     }

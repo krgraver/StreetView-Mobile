@@ -6,5 +6,6 @@ module.exports = mongoose.model('View', {
 	userLastName: String,
 	image: String,
 	description: String,
+	artType: String,
 	date: {type: Date, default: Date.now}
 });
