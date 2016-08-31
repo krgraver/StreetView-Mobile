@@ -23,27 +23,4 @@ angular.module('user.controller', [])
 
 		// Cordova Camera Plugin
 
-		$scope.pictureSourceType = {};
-		$scope.destinationType = {};
-
-		document.addEventListener("deviceready", $scope.onDeviceReady, false);
-
-		$scope.onDeviceReady = function() {
-			$scope.pictureSourceType = navigator.camera.PictureSourceType;
-			$scope.destinationType = navigator.camera.DestinationType;
-		}
-
-		$scope.onPhotoDataSuccess = function() {
-			console.log("Open camera");
-		}
-
-		$scope.onFail = function(err) {
-			console.error(err);
-		}
-
-		$scope.capturePhoto = function() {
-			console.log("function is firing");
-			navigator.camera.getPicture($scope.onPhotoDataSuccess, onFail, {});
-		}
-
 	}]);

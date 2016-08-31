@@ -28,17 +28,18 @@ angular.module('view.controller', [])
 			$state.go('tab.views-list');
 		}
 
-		// Show all views in list tab
+		// Initialize all views and allow pull to refresh
 
-		$scope.getAllViews = function() {
-			$scope.views = {};
+		$scope.doRefresh = function() {
+    $http.get('/api/view/get')
+     .success(function(allViews) {
+       $scope.views = allViews;
+     })
+     .finally(function() {
+       // Stop the ion-refresher from spinning
+       $scope.$broadcast('scroll.refreshComplete');
+     });
+  };
 
-			$http.get('/api/view/get').success(function(response) {
-				$scope.views = response
-			}).error(function(err) {
-				console.error(err);
-			});
-
-		}
 
 	}]);

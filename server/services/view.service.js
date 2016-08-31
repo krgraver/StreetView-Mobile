@@ -11,7 +11,9 @@ module.exports.postView = function(req, res) {
 // Handle request to show all views
 
 module.exports.getViews = function(req, res) {
-	View.find({}, function(err, allViews) {
+	View.find({})
+		.sort({date: -1})
+		.exec( function(err, allViews) {
 		if (err) {
 			console.error(err);
 		} else {
@@ -19,3 +21,13 @@ module.exports.getViews = function(req, res) {
 		}
 	});
 }
+
+// module.exports.getViews = function(req, res) {
+// 	View.find({}, function(err, allViews) {
+// 		if (err) {
+// 			console.error(err);
+// 		} else {
+// 			res.json(allViews);
+// 		}
+// 	});
+// }
