@@ -16,7 +16,8 @@
   },
   "cordovaPlugins": [],
   "cordovaPlatforms": [
-    "ios"
+    "ios",
+    "android"
   ],
   "main": "gulpfile.js",
   "scripts": {

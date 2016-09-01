@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var View = require('../datasets/views');
+var View = require('../models/views');
 
 // Handle request for adding view
 
@@ -21,13 +21,3 @@ module.exports.getViews = function(req, res) {
 		}
 	});
 }
-
-// module.exports.getViews = function(req, res) {
-// 	View.find({}, function(err, allViews) {
-// 		if (err) {
-// 			console.error(err);
-// 		} else {
-// 			res.json(allViews);
-// 		}
-// 	});
-// }

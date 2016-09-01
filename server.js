@@ -3,9 +3,9 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 var app = express();
-var authentication = require('./server/services/auth.service');
-var view = require('./server/services/view.service');
-var user = require('./server/services/user.service');
+var authentication = require('./server/controllers/auth');
+var view = require('./server/controllers/view');
+var user = require('./server/controllers/user');
 
 mongoose.connect('mongodb://localhost:27017/street-view');
 

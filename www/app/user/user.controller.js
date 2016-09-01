@@ -1,9 +1,9 @@
 angular.module('user.controller', [])
-	.controller('UserController', ['$scope', '$state', '$http', function($scope, $state, $http) {
+	.controller('UserController', ['$scope', '$state', '$http', 'Camera', function($scope, $state, $http, Camera) {
 
 		$scope.user = JSON.parse(localStorage['User-Data']);
 
-		// Account Setup
+		// Account setup
 
 		$scope.addUserInfo = function() {
 			console.log($scope.user);
@@ -21,6 +21,22 @@ angular.module('user.controller', [])
 			$state.go('login');
 		}
 
-		// Cordova Camera Plugin
+		// Cordova camera plugin
+
+		$scope.getPicture = function (options) {
+	
+      var options = {
+        quality : 75,
+        targetWidth: 200,
+        targetHeight: 200,
+        sourceType: 1
+      };
+
+      Camera.getPicture(options).then(function(imageData) {
+        $scope.picture = imageData;;
+      }, function(err) {
+        console.log(err);
+      });
+   }; 
 
 	}]);

@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var User = require('../datasets/users');
+var User = require('../models/users');
 
 // Handle request to add new User
 
