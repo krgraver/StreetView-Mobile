@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var View = require('../models/views');
+var View = require('./views.model');
 
 // Handle request for adding view
 

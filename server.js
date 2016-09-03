@@ -3,9 +3,9 @@ var mongoose = require('mongoose');
 var bodyParser = require('body-parser');
 
 var app = express();
-var authentication = require('./server/controllers/auth');
-var view = require('./server/controllers/view');
-var user = require('./server/controllers/user');
+var auth = require('./server/auth/auth.controller');
+var view = require('./server/view/view.controller');
+var user = require('./server/user/user.controller');
 
 mongoose.connect('mongodb://localhost:27017/street-view');
 
@@ -14,8 +14,8 @@ app.use(express.static(__dirname + "/www"));
 app.use('/node_modules', express.static(__dirname + "/node_modules"));
 
 // Authentication
-app.post('/api/user/signup', authentication.signup);
-app.post('/api/user/login', authentication.login);
+app.post('/api/user/signup', auth.signup);
+app.post('/api/user/login', auth.login);
 
 // View
 app.post('/api/view/post', view.postView);

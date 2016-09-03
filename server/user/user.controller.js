@@ -1,5 +1,5 @@
 var mongoose = require('mongoose');
-var User = require('../models/users');
+var User = require('./users.model');
 
 // Handle request to update user model after Account Setup
 
