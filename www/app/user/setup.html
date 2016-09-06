@@ -1,20 +1,12 @@
 <ion-view view-title="Account Setup">
-  <ion-content>
-  	<div class="list">
-  		<button class="button button-stable" ng-click="getPicture()">
-			  Upload Profile Pic
-			</button>
-		  <label class="item item-input item-floating-label">
-		    <span class="input-label">First Name</span>
-		    <input type="text" placeholder="First Name" ng-model="user.firstName">
-		  </label>
-		  <label class="item item-input item-floating-label">
-		    <span class="input-label">Last Name</span>
-		    <input type="text" placeholder="Last Name" ng-model="user.lastName">
-		  </label>
-		  <button class="button button-block button-positive" ng-click="addUserInfo()" ui-sref="tab.views-map">
-		  Let's Go!
-		</button>
+    <ion-content>
+	  	<div class="list">
+	  		<button class="button button-stable" ng-click="getPicture()">Upload Profile Pic</button>
+			<label class="item item-input item-floating-label">
+			    <span class="input-label">Display Name</span>
+			    <input type="text" placeholder="Display Name" ng-model="user.displayName">
+			</label>
+			<button class="button button-block button-positive" ng-click="addUserInfo()">Let's Go!</button>
 		</div>
-  </ion-content>
+    </ion-content>
 </ion-view>

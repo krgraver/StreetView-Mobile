@@ -2,17 +2,16 @@ angular.module('camera.factory', [])
 	.factory('Camera', function($q) {
 
 		return {
-      getPicture: function(options) {
-        var q = $q.defer();
+            getPicture: function(options) {
+                var q = $q.defer();
 
-        navigator.camera.getPicture(function(result) {
-        	q.resolve(result);
-        }, function(err) {
-          q.reject(err);
-        }, options);
+                navigator.camera.getPicture(function(result) {
+        	       q.resolve(result);
+                }, function(err) {
+                    q.reject(err);
+                }, options);
 
-        return q.promise;
-      }
-    }
-
-	});
+            return q.promise;
+            }
+        }
+    });

@@ -1,30 +1,36 @@
 angular.module('auth.controller', [])
-	.controller('AuthenticationController', ['$scope', '$state', '$http', function($scope, $state, $http) {
+	.controller('AuthenticationController', ['$scope', '$state', '$http', 'constant', function($scope, $state, $http, constant) {
 
 		$scope.newUser = {};
-		$scope.userInfo = {};
 		$scope.login = {};
 
 		// User Registration
 
 		$scope.createUser = function() {
-			$http.post('/api/user/signup', $scope.newUser).success(function(response) {
-				localStorage.setItem('User-Data', JSON.stringify(response));
-				$state.go('setup');
+			$http.post(constant.API_BASE_URL + '/api/user/signup', $scope.newUser)
+			.success(function(response) {
+				if (response === "success") {
+					$state.go('setup');
+				} else {
+					$scope.error = response;
+				}
 			}).error(function(err) {
-				console.error(err);
+				console.log(err);
 			});
 		}
 
 		// User Login
 
 		$scope.logUserIn = function() {
-			$http.post('/api/user/login', $scope.login).success(function(response) {
-				localStorage.setItem('User-Data', JSON.stringify(response));
-				$state.go('tab.views-map');
+			$http.post(constant.API_BASE_URL + '/api/user/login', $scope.login)
+			.success(function(response) {
+				if (response === "authenticated") {
+					$state.go('tab.views-map');
+				} else {
+					$scope.error = response;
+				}
 			}).error(function(err) {
-				console.error(err);
+				console.log(err);
 			});
 		}
-
 	}]);

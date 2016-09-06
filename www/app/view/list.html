@@ -1,18 +1,15 @@
-<ion-view view-title="Views List" ng-init="doRefresh()">
-  <ion-nav-buttons side="right">
-    <a class="button button-clear" ui-sref="tab.views-list-new">Add View</a>
-  </ion-nav-buttons>
-  <ion-content>
-    <ion-refresher
-      pulling-text="Pull to refresh..."
-      on-refresh="doRefresh()">
-    </ion-refresher>
-    <div class="list">
-	    <a class="item item-thumbnail-left" ng-repeat="view in views">
-<!-- 	      <img src=""> -->
-	      <h2>{{view.description}}</h2>
-	      <p>{{view.userFirstName}} {{view.userLastName}} uploaded on {{view.date | date: 'MMM d, yyyy'}}</p>
-	    </a>
-	</div>
-  </ion-content>
+<ion-view view-title="Views List">
+    <ion-nav-buttons side="right">
+      <a class="button button-clear" ui-sref="tab.views-list-new">Add View</a>
+    </ion-nav-buttons>
+    <ion-content ng-init="doRefresh()">
+        <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+        <div class="list">
+	       <a class="item item-thumbnail-left" ng-repeat="view in views">
+<!-- 	       <img src=""> -->
+	           <h2>{{view.description}}</h2>
+	           <p>Uploaded by {{view.user}}</p>
+	       </a>
+	    </div>
+    </ion-content>
 </ion-view>

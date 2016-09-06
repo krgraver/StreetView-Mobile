@@ -1,42 +1,51 @@
 angular.module('user.controller', [])
-	.controller('UserController', ['$scope', '$state', '$http', 'Camera', function($scope, $state, $http, Camera) {
+	.controller('UserController', ['$scope', '$state', '$http', 'constant', 'Camera', function($scope, $state, $http, constant,  Camera) {
 
-		$scope.user = JSON.parse(localStorage['User-Data']);
+		$scope.user = {};
 
 		// Account setup
 
 		$scope.addUserInfo = function() {
-			console.log($scope.user);
-			$http.put('/api/user/put', $scope.user).success(function(response) {
-				localStorage.setItem('User-Data', JSON.stringify(response));
-			}).error(function(err) {
-				console.error(err);
-			});
+			$http.put(constant.API_BASE_URL + '/api/user/setup', $scope.user);
+			$state.go('tab.views-map');
+		}
+
+		$scope.showProfile = function() {
+			$http.get(constant.API_BASE_URL + '/api/user/show').success(function(response) {
+				$scope.displayName = response;
+			})
 		}
 
 		// Log User out
 
 		$scope.logUserOut = function() {
-			localStorage.clear();
-			$state.go('login');
+			$http.get(constant.API_BASE_URL + '/api/user/logout')
+			.success(function(response) {
+				if (response === "logged out") {
+					$state.go('login');
+				} else {
+					console.log(response);
+				}
+			});
+			
 		}
 
 		// Cordova camera plugin
 
 		$scope.getPicture = function (options) {
 	
-      var options = {
-        quality : 75,
-        targetWidth: 200,
-        targetHeight: 200,
-        sourceType: 1
-      };
+	    	var options = {
+		        quality : 75,
+		        targetWidth: 200,
+		        targetHeight: 200,
+		        sourceType: 1
+	    	};
 
-      Camera.getPicture(options).then(function(imageData) {
-        $scope.picture = imageData;;
-      }, function(err) {
-        console.log(err);
-      });
-   }; 
+	    	Camera.getPicture(options).then(function(imageData) {
+	        	$scope.picture = imageData;;
+	    	}, function(err) {
+	        	console.log(err);
+	    	});
+	    }; 
 
 	}]);
