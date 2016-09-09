@@ -1,33 +1,33 @@
-angular.module('user.controller', [])
+angular.module('app')
 	.controller('UserController', ['$scope', '$state', '$http', 'constant', 'Camera', function($scope, $state, $http, constant,  Camera) {
-
-		$scope.user = {};
 
 		// Account setup
 
+		$scope.user = {};
+
 		$scope.addUserInfo = function() {
-			$http.put(constant.API_BASE_URL + '/api/user/setup', $scope.user);
+			var user = firebase.auth().currentUser;
+
+			user.updateProfile({
+			  	displayName: $scope.user.displayName
+			});
 			$state.go('tab.views-map');
 		}
 
 		$scope.showProfile = function() {
-			$http.get(constant.API_BASE_URL + '/api/user/show').success(function(response) {
-				$scope.displayName = response;
-			})
+			var displayName = firebase.auth().currentUser.displayName;
+			$scope.displayName = displayName;
 		}
 
 		// Log User out
 
 		$scope.logUserOut = function() {
-			$http.get(constant.API_BASE_URL + '/api/user/logout')
-			.success(function(response) {
-				if (response === "logged out") {
-					$state.go('login');
-				} else {
-					console.log(response);
-				}
-			});
-			
+			firebase.auth().signOut()
+				.then(function() {
+			  		$state.go('login');
+				}, function(error) {
+			  		console.log(error);
+				});
 		}
 
 		// Cordova camera plugin

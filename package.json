@@ -3,6 +3,7 @@
   "version": "1.1.1",
   "description": "StreetView: An Ionic project",
   "dependencies": {
+    "angular": "^1.5.8",
     "firebase": "^3.3.0",
     "gulp": "^3.5.6",
     "gulp-concat": "^2.2.0",

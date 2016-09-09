@@ -1,36 +1,49 @@
-angular.module('auth.controller', [])
+angular.module('app')
 	.controller('AuthenticationController', ['$scope', '$state', '$http', 'constant', function($scope, $state, $http, constant) {
 
-		$scope.newUser = {};
-		$scope.login = {};
 
 		// User Registration
 
+		$scope.newUser = {};
+
 		$scope.createUser = function() {
-			$http.post(constant.API_BASE_URL + '/api/user/signup', $scope.newUser)
-			.success(function(response) {
-				if (response === "success") {
+			firebase.auth()
+				.createUserWithEmailAndPassword($scope.newUser.email, $scope.newUser.password)
+				.then(function() {
 					$state.go('setup');
-				} else {
-					$scope.error = response;
-				}
-			}).error(function(err) {
-				console.log(err);
-			});
+				})
+				.catch(function(error) {
+					$scope.error = error.message;
+				});
 		}
 
 		// User Login
 
+		$scope.login = {};
+
 		$scope.logUserIn = function() {
-			$http.post(constant.API_BASE_URL + '/api/user/login', $scope.login)
-			.success(function(response) {
-				if (response === "authenticated") {
+			firebase.auth()
+				.signInWithEmailAndPassword($scope.login.email, $scope.login.password)
+				.then(function() {
 					$state.go('tab.views-map');
-				} else {
-					$scope.error = response;
-				}
-			}).error(function(err) {
-				console.log(err);
-			});
+				})
+				.catch(function(error) {
+					$scope.error = error.message;
+				});
+		}
+
+		// Send password reset email
+
+		$scope.forgot = {};
+
+		$scope.sendResetEmail = function() {
+			firebase.auth()
+				.sendPasswordResetEmail($scope.forgot.email)
+				.then(function() {
+					$state.go('login');
+				})
+				.catch(function(error) {
+					$scope.error = error.message;
+				});
 		}
 	}]);

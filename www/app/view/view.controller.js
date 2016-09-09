@@ -1,19 +1,24 @@
-angular.module('view.controller', [])
-	.controller('ViewController', ['$scope', '$state', '$http', 'constant', function($scope, $state, $http, constant) {
-
-		$scope.view = {};
-
-		$scope.types = ['Graffiti', 'Painting', 'Sculpture', 'Stencil', 'Other'];
+angular.module('app')
+	.controller('ViewController', ['$scope', '$state', '$stateParams', '$http', 'constant', function($scope, $state, $stateParams, $http, constant) {
 
 		// Post view to server
 
-		$scope.uploadView = function() {
-			var request = {
-				artType: $scope.view.artType,
-				description: $scope.view.description
-			}
+		$scope.view = {};
+		$scope.types = ['Graffiti', 'Painting', 'Sculpture', 'Stencil', 'Other'];
 
-			$http.post(constant.API_BASE_URL + '/api/view/post', request);
+		$scope.uploadView = function() {
+			var user = firebase.auth().currentUser,
+			viewData = {
+				user: user.displayName,
+				artType: $scope.view.artType,
+				description: $scope.view.description,
+				dateAdded: 1-Date.now()
+			},
+			newPostKey = firebase.database().ref().child('views').push().key,
+			updates = {};
+
+			updates['/views/' + newPostKey] = viewData;
+			firebase.database().ref().update(updates);
 
 			$state.go('tab.views-list');
 		}
@@ -21,13 +26,15 @@ angular.module('view.controller', [])
 		// Initialize all views and allow pull to refresh
 
 		$scope.doRefresh = function() {
-		    $http.get(constant.API_BASE_URL + '/api/view/get')
-		    	.success(function(allViews) {
-		     		$scope.views = allViews;
-		    	})
-		    	.finally(function() {
-		       // Stop the ion-refresher from spinning
-		     	$scope.$broadcast('scroll.refreshComplete');
-		    });
+		    var allViews = [];
+			firebase.database().ref('views/').orderByChild('dateAdded').once('value', function(snapshot) {
+				snapshot.forEach(function(ss) {
+					allViews.push(ss.val());
+				})
+			  	$scope.views = allViews;
+			}, function(errorObject) {
+				console.log(errorObject.code);
+			});
+			$scope.$broadcast('scroll.refreshComplete');
 		}
 	}]);
