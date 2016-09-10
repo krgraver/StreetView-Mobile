@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('ViewController', ['$scope', '$state', '$stateParams', '$http', 'constant', function($scope, $state, $stateParams, $http, constant) {
+	.controller('ViewController', ['$scope', '$state', '$stateParams', '$http', '$firebaseArray', '$firebaseObject', function($scope, $state, $stateParams, $http, $firebaseArray, $firebaseObject) {
 
 		// Post view to server
 
@@ -12,7 +12,7 @@ angular.module('app')
 				user: user.displayName,
 				artType: $scope.view.artType,
 				description: $scope.view.description,
-				dateAdded: 1-Date.now()
+				dateAdded: Date.now()
 			},
 			newPostKey = firebase.database().ref().child('views').push().key,
 			updates = {};
@@ -23,18 +23,21 @@ angular.module('app')
 			$state.go('tab.views-list');
 		}
 
-		// Initialize all views and allow pull to refresh
+		// Initialize Views List and allow pull to refresh
 
 		$scope.doRefresh = function() {
-		    var allViews = [];
-			firebase.database().ref('views/').orderByChild('dateAdded').once('value', function(snapshot) {
-				snapshot.forEach(function(ss) {
-					allViews.push(ss.val());
-				})
-			  	$scope.views = allViews;
-			}, function(errorObject) {
-				console.log(errorObject.code);
-			});
+		    var ref = firebase.database().ref('views/');
+			
+			$scope.views = $firebaseArray(ref);
 			$scope.$broadcast('scroll.refreshComplete');
 		}
+
+		// Initialize View Detail
+
+		$scope.getDetail = function() {
+			var ref = firebase.database().ref('views/');
+
+			$scope.viewDetail = $firebaseObject(ref.child($stateParams.id));
+		}
+		
 	}]);

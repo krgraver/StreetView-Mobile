@@ -17,7 +17,7 @@ var config = {
 firebase.initializeApp(config);
 
 
-angular.module('app', ['ionic', 'firebase', 'camera.factory'])
+angular.module('app', ['ionic', 'firebase'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -90,7 +90,7 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     })
 
     .state('tab.views-map-new', {
-        url: '/views-map-new',
+        url: '/views-map/new',
         views: {
             'tab-views-map': {
                 templateUrl: 'app/view/map-new.html',
@@ -110,7 +110,7 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     })
 
     .state('tab.views-list-new', {
-        url: '/views-list-new',
+        url: '/views-list/new',
         views: {
             'tab-views-list': {
                 templateUrl: 'app/view/list-new.html',
@@ -120,7 +120,7 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     })
 
     .state('tab.views-detail', {
-        url: '/views-detail/:id',
+        url: '/views-list/:id',
         views: {
             'tab-views-list': {
                 templateUrl: 'app/view/detail.html',
@@ -140,7 +140,7 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     })
 
     .state('tab.profile-edit', {
-        url: '/profile-edit',
+        url: '/profile/edit',
         views: {
             'tab-profile': {
                 templateUrl: 'app/user/profile-edit.html',
@@ -150,6 +150,6 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/views-map');
+    $urlRouterProvider.otherwise('/login');
 
 });

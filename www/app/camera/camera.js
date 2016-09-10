@@ -1,4 +1,4 @@
-angular.module('camera.factory', [])
+angular.module('app')
 	.factory('Camera', function($q) {
 
 		return {

@@ -5,7 +5,7 @@
     <ion-content ng-init="doRefresh()">
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
         <div class="list">
-	       <a class="item item-thumbnail-left" ng-repeat="view in views">
+	       <a class="item item-thumbnail-left" ng-repeat="view in views" ui-sref="tab.views-detail({ id:view.$id })">
 <!-- 	       <img src=""> -->
 	           <h2>{{view.description}}</h2>
 	           <p>Uploaded by {{view.user}}</p>

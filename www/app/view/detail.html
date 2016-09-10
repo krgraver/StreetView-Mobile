@@ -2,7 +2,7 @@
 	<ion-nav-buttons side="left">
     	<a class="button button-clear icon-left ion-chevron-left" ui-sref="tab.views-list">Back</a>
   	</ion-nav-buttons>
-	<ion-content>
-		
+	<ion-content ng-init="getDetail()">
+		<h1>{{viewDetail.description}}</h1>
 	</ion-content>
 </ion-view>

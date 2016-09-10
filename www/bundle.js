@@ -608,9 +608,8 @@ var config = {
 };
 firebase.initializeApp(config);
 
-var constant = require('./config/constants');
 
-angular.module('app', ['ionic', 'firebase', 'camera.factory'])
+angular.module('app', ['ionic', 'firebase'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {
@@ -626,8 +625,6 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
         }
     });
 })
-
-.constant('constant', constant.GLOBAL)
 
 .config(function($stateProvider, $urlRouterProvider) {
 
@@ -685,7 +682,7 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     })
 
     .state('tab.views-map-new', {
-        url: '/views-map-new',
+        url: '/views-map/new',
         views: {
             'tab-views-map': {
                 templateUrl: 'app/view/map-new.html',
@@ -705,7 +702,7 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     })
 
     .state('tab.views-list-new', {
-        url: '/views-list-new',
+        url: '/views-list/new',
         views: {
             'tab-views-list': {
                 templateUrl: 'app/view/list-new.html',
@@ -715,7 +712,7 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     })
 
     .state('tab.views-detail', {
-        url: '/views-detail/:id',
+        url: '/views-list/:id',
         views: {
             'tab-views-list': {
                 templateUrl: 'app/view/detail.html',
@@ -735,7 +732,7 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     })
 
     .state('tab.profile-edit', {
-        url: '/profile-edit',
+        url: '/profile/edit',
         views: {
             'tab-profile': {
                 templateUrl: 'app/user/profile-edit.html',
@@ -745,16 +742,8 @@ angular.module('app', ['ionic', 'firebase', 'camera.factory'])
     });
 
     // if none of the above states are matched, use this as the fallback
-    $urlRouterProvider.otherwise('/tab/views-map');
+    $urlRouterProvider.otherwise('/login');
 
 });
 
-},{"./config/constants":4,"firebase":1}],4:[function(require,module,exports){
-const constant = {
-	GLOBAL: {
-		API_BASE_URL: 'http://localhost:3000'
-	}
-};
-
-module.exports = constant;
-},{}]},{},[3]);
+},{"firebase":1}]},{},[3]);
