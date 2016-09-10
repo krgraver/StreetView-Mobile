@@ -1,0 +1,10 @@
+<ion-view view-title="Edit View" ng-init="getDetail()">
+	<ion-nav-buttons side="left">
+    	<a class="button button-clear icon-left ion-chevron-left" ui-sref="tab.views-list">Cancel</a>
+  	</ion-nav-buttons>
+	<ion-content>
+		<textarea rows="4" cols="50" ng-model="newInfo.description" placeholder="{{viewDetail.description}}"></textarea>
+		<button class="button button-full button-positive" ng-click="updateView()" ui-sref="tab.views-list">Save Changes</button>
+		<button class="button button-full button-outline button-positive" ng-click="deleteView()" ui-sref="tab.views-list">Delete View</button>
+	</ion-content>
+</ion-view>

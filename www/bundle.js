@@ -721,6 +721,16 @@ angular.module('app', ['ionic', 'firebase'])
         }
     })
 
+    .state('tab.views-edit', {
+        url: '/views-list/:id/edit',
+        views: {
+            'tab-views-list': {
+                templateUrl: 'app/view/edit.html',
+                controller: 'ViewController'
+            }
+        }
+    })
+
     .state('tab.profile', {
         url: '/profile',
         views: {

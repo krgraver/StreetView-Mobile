@@ -1,8 +1,12 @@
-<ion-view view-title="">
+<ion-view view-title="" ng-init="getDetail()">
 	<ion-nav-buttons side="left">
     	<a class="button button-clear icon-left ion-chevron-left" ui-sref="tab.views-list">Back</a>
   	</ion-nav-buttons>
-	<ion-content ng-init="getDetail()">
+  	<ion-nav-buttons side="right">
+    	<a class="button button-clear" ui-sref="tab.views-edit({ id:viewDetail.$id })" ng-show="currentUser.displayName === viewDetail.user">Edit</a>
+  	</ion-nav-buttons>
+	<ion-content>
 		<h1>{{viewDetail.description}}</h1>
+		<p>Uploaded by {{viewDetail.user}}</p>
 	</ion-content>
 </ion-view>
