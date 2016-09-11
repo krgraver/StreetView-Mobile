@@ -39,7 +39,6 @@ angular.module('app')
 			var user = firebase.auth().currentUser;
 			$scope.displayName = user.displayName;
 			$scope.photoURL = user.photoURL;
-			console.log(user);
 		}
 
 		// Log User out

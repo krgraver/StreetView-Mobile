@@ -609,7 +609,7 @@ var config = {
 firebase.initializeApp(config);
 
 
-angular.module('app', ['ionic', 'firebase'])
+angular.module('app', ['ionic', 'ngCordova', 'firebase'])
 
 .run(function($ionicPlatform) {
     $ionicPlatform.ready(function() {

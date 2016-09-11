@@ -76,13 +76,60 @@ angular.module('app')
 		// Google Maps
 
 		$scope.initMap = function() {
-		    
-		    var map = new google.maps.Map(document.getElementById('map'), {
-	        	center: {lat: -34.397, lng: 150.644},
-	        	zoom: 8
-	        });
+		    var options = {
+		    	timeout: 10000,
+		    	enableHighAccuracy: true
+		    };
 
-		    $scope.map = map;
+		    function success(position) {
+		    	var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+
+		    	var mapOptions = {
+		      		center: latLng,
+		      		zoom: 15,
+		      		mapTypeId: google.maps.MapTypeId.ROADMAP,
+		      		styles: [
+			            {
+			              	featureType: 'all',
+			              	stylers: [
+			                	{ saturation: -80 }
+			              	]
+			            },{
+			              	featureType: 'road.arterial',
+			              	elementType: 'geometry',
+			              	stylers: [
+			                	{ hue: '#00ffee' },
+			                	{ saturation: 50 }
+			              	]
+			            },{
+			              	featureType: 'poi.business',
+			              	elementType: 'labels',
+			              	stylers: [
+			                	{ visibility: 'off' }
+			              	]
+			            }
+			        ]
+		    	};
+
+		    	$scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
+
+		    	var image = 'assets/images/me-marker.svg'
+		    	var meMarker = {
+			    	position: latLng,
+			    	map: $scope.map,
+			    	icon: image,
+			    	title: 'My Position'
+				};
+
+		    	$scope.meMarker = new google.maps.Marker(meMarker);
+		    };
+
+		    function error(err) {
+		    	console.log(err.message);
+		    };
+
+		    navigator.geolocation.getCurrentPosition(success, error, options);
+
 		}
 		
 	}]);
