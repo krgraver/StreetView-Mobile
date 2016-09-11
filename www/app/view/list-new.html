@@ -3,7 +3,10 @@
     	<a ui-sref="tab.views-list" class="button button-clear">Cancel</a>
   	</ion-nav-buttons>
   	<ion-content>
-  		<button class="button button-stable">Take Photo</button>
+  		<div class="image-container">
+			<img ng-src="{{view.photoURL}}" class="image" ng-show="view.photoURL">
+		</div>
+  		<button class="button button-stable" ng-click="getViewPic()">Take Photo</button>
   		<div class="list">
   			<label class="item item-input item-select">
 		    	<div class="input-label">Art Type</div>

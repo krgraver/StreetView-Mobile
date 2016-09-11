@@ -1,3 +1,14 @@
+<style type="text/css">
+	.image-container {
+		width: 200px;
+		height: 200px;
+	}
+
+	.image {
+		width: 100%;
+		height: 100%;
+	}
+</style>
 <ion-view view-title="" ng-init="getDetail()">
 	<ion-nav-buttons side="left">
     	<a class="button button-clear icon-left ion-chevron-left" ui-sref="tab.views-list">Back</a>
@@ -6,6 +17,9 @@
     	<a class="button button-clear" ui-sref="tab.views-edit({ id:viewDetail.$id })" ng-show="currentUser.displayName === viewDetail.user">Edit</a>
   	</ion-nav-buttons>
 	<ion-content>
+		<div class="image-container">
+			<img ng-src="{{viewDetail.photoURL}}" class="image">
+		</div>
 		<h1>{{viewDetail.description}}</h1>
 		<p>Uploaded by {{viewDetail.user}}</p>
 	</ion-content>

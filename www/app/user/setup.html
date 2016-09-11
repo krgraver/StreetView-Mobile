@@ -1,7 +1,8 @@
 <ion-view view-title="Account Setup">
     <ion-content>
 	  	<div class="list">
-	  		<button class="button button-stable" ng-click="getPicture()">Upload Profile Pic</button>
+	  		<img ng-src="{{user.photoURL}}" ng-show="user.photoURL">
+	  		<button class="button button-stable" ng-click="getProfilePic()">Upload Profile Pic</button>
 			<label class="item item-input item-floating-label">
 			    <span class="input-label">Display Name</span>
 			    <input type="text" placeholder="Display Name" ng-model="user.displayName">

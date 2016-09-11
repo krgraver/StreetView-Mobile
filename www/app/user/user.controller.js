@@ -9,14 +9,37 @@ angular.module('app')
 			var user = firebase.auth().currentUser;
 
 			user.updateProfile({
-			  	displayName: $scope.user.displayName
+			  	displayName: $scope.user.displayName,
+			  	photoURL: $scope.user.photoURL
 			});
 			$state.go('tab.views-map');
 		}
 
+		// Take Profile picture
+
+		$scope.getProfilePic = function (options) {
+	
+	    	var options = {
+		        quality : 75,
+		        targetWidth: 200,
+		        targetHeight: 200,
+		        sourceType: 1
+	    	};
+
+	    	Camera.getPicture(options).then(function(imageData) {
+	        	$scope.user.photoURL = imageData;;
+	    	}, function(err) {
+	        	console.log(err);
+	    	});
+	    }; 
+
+		// Show info in profile
+
 		$scope.showProfile = function() {
-			var displayName = firebase.auth().currentUser.displayName;
-			$scope.displayName = displayName;
+			var user = firebase.auth().currentUser;
+			$scope.displayName = user.displayName;
+			$scope.photoURL = user.photoURL;
+			console.log(user);
 		}
 
 		// Log User out
@@ -29,23 +52,5 @@ angular.module('app')
 			  		console.log(error);
 				});
 		}
-
-		// Cordova camera plugin
-
-		$scope.getPicture = function (options) {
-	
-	    	var options = {
-		        quality : 75,
-		        targetWidth: 200,
-		        targetHeight: 200,
-		        sourceType: 1
-	    	};
-
-	    	Camera.getPicture(options).then(function(imageData) {
-	        	$scope.picture = imageData;;
-	    	}, function(err) {
-	        	console.log(err);
-	    	});
-	    }; 
 
 	}]);
