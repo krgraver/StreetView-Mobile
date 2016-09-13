@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('UserController', ['$scope', '$state', '$http', 'Camera', function($scope, $state, $http,  Camera) {
+	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', function($scope, $state, $http, $cordovaCamera) {
 
 		// Account setup
 
@@ -17,17 +17,21 @@ angular.module('app')
 
 		// Take Profile picture
 
-		$scope.getProfilePic = function (options) {
+		$scope.getProfilePic = function () {
 	
 	    	var options = {
-		        quality : 75,
-		        targetWidth: 200,
-		        targetHeight: 200,
-		        sourceType: 1
+		        quality: 75,
+                destinationType: navigator.camera.DestinationType.DATA_URL,
+                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                encodingType: navigator.camera.EncodingType.JPEG,
+                allowEdit: true,
+                targetWidth: 300,
+                targetHeight: 300,
+                saveToPhotoAlbum: false
 	    	};
 
-	    	Camera.getPicture(options).then(function(imageData) {
-	        	$scope.user.photoURL = imageData;;
+	    	$cordovaCamera.getPicture(options).then(function(imageData) {
+	        	$scope.user.photoURL = "data:image/jpeg;base64," + imageData;
 	    	}, function(err) {
 	        	console.log(err);
 	    	});
@@ -39,6 +43,8 @@ angular.module('app')
 			var user = firebase.auth().currentUser;
 			$scope.displayName = user.displayName;
 			$scope.photoURL = user.photoURL;
+
+			$scope.$broadcast('scroll.refreshComplete');
 		}
 
 		// Log User out

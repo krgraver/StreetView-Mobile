@@ -9,11 +9,12 @@
 		height: 100%;
 	}
 </style>
-<ion-view view-title="Profile">
+<ion-view view-title="Profile" ng-init="showProfile()">
 	<ion-nav-buttons side="right">
     	<a class="button button-clear" ui-sref="tab.profile-edit">Edit</a>
   	</ion-nav-buttons>
-	<ion-content ng-init="showProfile()">
+	<ion-content>
+		<ion-refresher pulling-text="Pull to refresh..." on-refresh="showProfile()"></ion-refresher>
 		<div class="image-container">
 			<img ng-src="{{photoURL}}" class="image">
 		</div>

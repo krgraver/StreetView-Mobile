@@ -89,11 +89,11 @@ angular.module('app', ['ionic', 'ngCordova', 'firebase'])
         }
     })
 
-    .state('tab.views-map-new', {
+    .state('tab.views-new', {
         url: '/views-map/new',
         views: {
             'tab-views-map': {
-                templateUrl: 'app/view/map-new.html',
+                templateUrl: 'app/view/new.html',
                 controller: 'ViewController'
             }
         }
@@ -104,16 +104,6 @@ angular.module('app', ['ionic', 'ngCordova', 'firebase'])
         views: {
             'tab-views-list': {
                 templateUrl: 'app/view/list.html',
-                controller: 'ViewController'
-            }
-        }
-    })
-
-    .state('tab.views-list-new', {
-        url: '/views-list/new',
-        views: {
-            'tab-views-list': {
-                templateUrl: 'app/view/list-new.html',
                 controller: 'ViewController'
             }
         }

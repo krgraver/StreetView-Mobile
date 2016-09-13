@@ -1,5 +1,5 @@
 angular.module('app')
-	.controller('ViewController', ['$scope', '$state', '$stateParams', '$http', '$firebaseArray', '$firebaseObject', 'Camera', function($scope, $state, $stateParams, $http, $firebaseArray, $firebaseObject, Camera) {
+	.controller('ViewController', ['$scope', '$state', '$stateParams', '$http', '$firebaseArray', '$firebaseObject', '$cordovaCamera', function($scope, $state, $stateParams, $http, $firebaseArray, $firebaseObject, $cordovaCamera) {
 
 		// Post view to server
 
@@ -26,17 +26,21 @@ angular.module('app')
 
 		// Take View pic
 
-		$scope.getViewPic = function (options) {
+		$scope.getViewPic = function () {
 	
 	    	var options = {
-		        quality : 75,
-		        targetWidth: 200,
-		        targetHeight: 200,
-		        sourceType: 1
+		        quality: 75,
+                destinationType: navigator.camera.DestinationType.DATA_URL,
+                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                encodingType: navigator.camera.EncodingType.JPEG,
+                allowEdit: true,
+                targetWidth: 300,
+                targetHeight: 300,
+                saveToPhotoAlbum: false
 	    	};
 
-	    	Camera.getPicture(options).then(function(imageData) {
-	        	$scope.view.photoURL = imageData;;
+	    	$cordovaCamera.getPicture(options).then(function(imageData) {
+	        	$scope.view.photoURL = "data:image/jpeg;base64," + imageData;
 	    	}, function(err) {
 	        	console.log(err);
 	    	});
@@ -111,6 +115,7 @@ angular.module('app')
 			        ]
 		    	};
 
+		    	// Draw map around current location
 		    	$scope.map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
 		    	var image = 'assets/images/me-marker.svg'
@@ -121,6 +126,7 @@ angular.module('app')
 			    	title: 'My Position'
 				};
 
+				// Place custom marker at current location
 		    	$scope.meMarker = new google.maps.Marker(meMarker);
 		    };
 
