@@ -147,29 +147,27 @@ angular.module('app')
 		    	ref.once('value', function(snapshot) {
 		    		var viewsObject = snapshot.val();
 
-		    		for (var view in viewsObject) {
+		    		for (view in viewsObject) (function(view) {
 
 		    			// avoids prototype property in viewsObject
 					  	if (viewsObject.hasOwnProperty(view)) {
 					    	var latLng = new google.maps.LatLng(viewsObject[view].viewPosition.latitude, viewsObject[view].viewPosition.longitude);
-							var viewMarker = {
+							var markerOptions = {
 						    	position: latLng,
 						    	map: map,
 						    	animation: google.maps.Animation.DROP,
 						    	title: 'View Position'
 							};
 
-							var viewPosition = new google.maps.Marker(viewMarker);
+							var viewMarker = new google.maps.Marker(markerOptions);
+							viewMarker.infowindow = new google.maps.InfoWindow();
 
-							var viewInfo = new google.maps.InfoWindow({
-							    content: '<img src="' + viewsObject[view].photoURL + '" style="width:150px; height:150px"><br><strong>' + viewsObject[view].description + '</strong>'
-							});
-							 
-							google.maps.event.addListener(viewPosition, 'click', function () {
-							    viewInfo.open(map, viewPosition);
+							viewMarker.addListener('click', function() {
+								this.infowindow.setContent('<img src="' + viewsObject[view].photoURL + '" style="width:150px; height:150px"><br><strong>' + viewsObject[view].description + '</strong>');
+								this.infowindow.open(map, viewMarker);
 							});
 					  	}
-					}
+					})(view);
 
 		    	});
 
