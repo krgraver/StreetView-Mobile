@@ -11,6 +11,7 @@
   			<label class="item item-input item-select">
 		    	<div class="input-label">Art Type</div>
 		    	<select ng-model="view.artType">
+		    		<option style="display:none" value="">select a type</option>
 		    		<option ng-repeat="type in types" value="{{type}}">{{type}}</option>
 		    	</select>
 		  	</label>
@@ -19,6 +20,6 @@
 		    	<input type="text" placeholder="Description" ng-model="view.description">
 		  	</label>
 		</div>
-		<button class="button button-block button-positive" ng-click="uploadView()">Submit</button>
+		<button class="button button-block button-positive" ng-click="uploadView(); initMap()">Submit</button>
   	</ion-content>
 </ion-view>

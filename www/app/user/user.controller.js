@@ -47,6 +47,18 @@ angular.module('app')
 			$scope.$broadcast('scroll.refreshComplete');
 		}
 
+		// Save user info
+
+		$scope.updateUser = function() {
+			var user = firebase.auth().currentUser;
+
+			user.updateProfile({
+			  	displayName: $scope.user.displayName,
+			  	photoURL: $scope.user.photoURL
+			});
+			$state.go('tab.profile');
+		}
+
 		// Log User out
 
 		$scope.logUserOut = function() {

@@ -735,7 +735,7 @@ angular.module('app', ['ionic', 'ngCordova', 'firebase'])
         url: '/profile/edit',
         views: {
             'tab-profile': {
-                templateUrl: 'app/user/profile-edit.html',
+                templateUrl: 'app/user/edit.html',
                 controller: 'UserController'
             }
         }

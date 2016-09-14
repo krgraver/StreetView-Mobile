@@ -3,11 +3,11 @@
 		height: 100%;
 	}
 </style>
-<ion-view view-title="Views Map">
+<ion-view view-title="Views Map" ng-init="initMap()">
   	<ion-nav-buttons side="right">
     	<a ui-sref="tab.views-new" class="button button-clear">Add View</a>
   	</ion-nav-buttons>
-  	<ion-content ng-init="initMap()">
+  	<ion-content>
 		<div id="map"></div>
   	</ion-content>
 </ion-view>
