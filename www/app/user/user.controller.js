@@ -1,5 +1,6 @@
 angular.module('app')
-	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', function($scope, $state, $http, $cordovaCamera) {
+	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', 
+		function($scope, $state, $http, $cordovaCamera) {
 
 		// Account setup
 

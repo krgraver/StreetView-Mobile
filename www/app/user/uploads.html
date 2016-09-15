@@ -1,0 +1,15 @@
+<ion-view view-title="My Uploads" ng-init="loadMyUploads()">
+  	<ion-nav-buttons side="left">
+    	<a class="button button-clear icon-left ion-chevron-left" ui-sref="tab.profile">Back</a>
+  	</ion-nav-buttons>
+  	<ion-content>
+  		<ion-refresher pulling-text="Pull to refresh..." on-refresh="loadMyUploads()"></ion-refresher>
+  		<div class="list">
+	       <a class="item item-thumbnail-left" ng-repeat="view in myUploads" ui-sref="tab.uploads-edit({ id:view.$id })">
+	           <img ng-src="{{view.photoURL}}">
+	           <h2>{{view.description}}</h2>
+	           <p>Uploaded by {{view.user}}</p>
+	       </a>
+	    </div>
+  	</ion-content>
+</ion-view>

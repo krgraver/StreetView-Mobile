@@ -147,6 +147,26 @@ angular.module('app', ['ionic', 'ngCordova', 'firebase'])
                 controller: 'UserController'
             }
         }
+    })
+
+    .state('tab.uploads', {
+        url: '/profile/uploads',
+        views: {
+            'tab-profile': {
+                templateUrl: 'app/user/uploads.html',
+                controller: 'ViewController'
+            }
+        }
+    })
+
+    .state('tab.uploads-edit', {
+        url: '/profile/uploads/:id/edit',
+        views: {
+            'tab-profile': {
+                templateUrl: 'app/user/uploads-edit.html',
+                controller: 'ViewController'
+            }
+        }
     });
 
     // if none of the above states are matched, use this as the fallback

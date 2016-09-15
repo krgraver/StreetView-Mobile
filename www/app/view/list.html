@@ -1,4 +1,22 @@
 <ion-view view-title="Views List" ng-init="doRefresh()">
+	<script id="filter.html" type="text/ng-template">
+		<ion-modal-view>
+			<ion-header-bar>
+		      	<button class="button button-clear" ng-click="closeModal()">Cancel</button>
+		      	<h1 class="title">Filter Views</h1>
+		    </ion-header-bar>
+		    <ion-content>
+		    	<ion-list>
+		    		<ion-radio ng-repeat="type in types" ng-model="filter.type" value="{{type}}">{{type}}</ion-radio>
+		    		<ion-radio ng-model="filter.type" value="None">No Filter</ion-radio>
+				</ion-list>
+				<button class="button button-block button-positive" ng-click="saveFilter(); doRefresh()">Save</button>
+		    </ion-content>
+		</ion-modal-view>
+	</script>
+	<ion-nav-buttons side="right">
+    	<a class="button button-clear ion-android-funnel" ng-click="openModal()"></a>
+  	</ion-nav-buttons>
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
         <div class="list">

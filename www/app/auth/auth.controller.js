@@ -1,5 +1,6 @@
 angular.module('app')
-	.controller('AuthenticationController', ['$scope', '$state', '$http', function($scope, $state, $http) {
+	.controller('AuthenticationController', ['$scope', '$state', '$http', 
+		function($scope, $state, $http) {
 
 		// User Registration
 

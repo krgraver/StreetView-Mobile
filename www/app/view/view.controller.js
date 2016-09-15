@@ -1,19 +1,21 @@
 angular.module('app')
-	.controller('ViewController', ['$scope', '$state', '$stateParams', '$http', '$firebaseArray', '$firebaseObject', '$cordovaCamera', function($scope, $state, $stateParams, $http, $firebaseArray, $firebaseObject, $cordovaCamera) {
+	.controller('ViewController', ['$scope', '$state', '$stateParams', '$ionicModal', '$http', '$firebaseArray', '$firebaseObject', '$cordovaCamera', 
+		function($scope, $state, $stateParams, $ionicModal, $http, $firebaseArray, $firebaseObject, $cordovaCamera) {
 
 		// Post view to server
 
 		$scope.view = {};
+		$scope.filter = {};
 		$scope.types = ['Graffiti', 'Painting', 'Sculpture', 'Stencil', 'Other'];
 
 		$scope.uploadView = function() {
-			var user = firebase.auth().currentUser,
-			viewData = {
+			var user = firebase.auth().currentUser;
+			var viewData = {
 				photoURL: $scope.view.photoURL,
 				user: user.displayName,
 				artType: $scope.view.artType,
 				description: $scope.view.description,
-				timeStamp: Date.now(),
+				timeStamp: 1-Date.now(),
 				viewPosition: $scope.view.position
 			},
 			newPostKey = firebase.database().ref().child('views').push().key,
@@ -60,10 +62,53 @@ angular.module('app')
 		// Initialize Views List and allow pull to refresh
 
 		$scope.doRefresh = function() {
-		    var ref = firebase.database().ref('views/');
+		    var ref = {};
+
+		    if ($scope.applyFilter) {
+		    	ref = firebase.database().ref('views/').orderByChild('artType').equalTo($scope.applyFilter);
+		    } else {
+		    	ref = firebase.database().ref('views/').orderByChild('timeStamp');
+		    }
 			
 			$scope.views = $firebaseArray(ref);
 			$scope.$broadcast('scroll.refreshComplete');
+		}
+
+		// Initialize My Uploads and allow pull to refresh
+
+		$scope.loadMyUploads = function() {
+			var user = firebase.auth().currentUser;
+		    var ref = firebase.database().ref('views/').orderByChild('user').equalTo(user.displayName);
+			
+			$scope.myUploads = $firebaseArray(ref);
+			$scope.$broadcast('scroll.refreshComplete');
+		}
+
+		// Views filter modal
+
+		$ionicModal.fromTemplateUrl('filter.html', {
+		    scope: $scope,
+		    animation: 'slide-in-up'
+		}).then(function(modal) {
+			$scope.modal = modal;
+		});
+
+		$scope.openModal = function() {
+		    $scope.modal.show();
+		}
+
+		$scope.closeModal = function() {
+		    $scope.modal.hide();
+		}
+
+		$scope.saveFilter = function() {
+			if ($scope.filter.type !== 'None') {
+				$scope.applyFilter = $scope.filter.type;
+				$scope.modal.hide();
+			} else {
+				$scope.applyFilter = '';
+				$scope.modal.hide();
+			}
 		}
 
 		// Initialize View Detail
