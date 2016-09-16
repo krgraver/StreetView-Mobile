@@ -14,7 +14,7 @@
     	<a class="button button-clear icon-left ion-chevron-left" ui-sref="tab.views-list">Back</a>
   	</ion-nav-buttons>
   	<ion-nav-buttons side="right">
-    	<a class="button button-clear" ui-sref="tab.views-edit({ id:viewDetail.$id })" ng-show="currentUser.displayName === viewDetail.user">Edit</a>
+    	<a class="button button-clear" ui-sref="tab.views-edit({ id:viewDetail.$id })" ng-show="currentUser.email === viewDetail.userEmail">Edit</a>
   	</ion-nav-buttons>
 	<ion-content>
 		<div class="image-container">

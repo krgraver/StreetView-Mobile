@@ -11,8 +11,9 @@ angular.module('app')
 		$scope.uploadView = function() {
 			var user = firebase.auth().currentUser;
 			var viewData = {
+				userEmail: user.email,
+				userDisplay: user.displayName,
 				photoURL: $scope.view.photoURL,
-				user: user.displayName,
 				artType: $scope.view.artType,
 				description: $scope.view.description,
 				timeStamp: 1-Date.now(),
@@ -78,7 +79,7 @@ angular.module('app')
 
 		$scope.loadMyUploads = function() {
 			var user = firebase.auth().currentUser;
-		    var ref = firebase.database().ref('views/').orderByChild('user').equalTo(user.displayName);
+		    var ref = firebase.database().ref('views/').orderByChild('userEmail').equalTo(user.email);
 			
 			$scope.myUploads = $firebaseArray(ref);
 			$scope.$broadcast('scroll.refreshComplete');

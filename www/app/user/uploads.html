@@ -8,7 +8,7 @@
 	       <a class="item item-thumbnail-left" ng-repeat="view in myUploads" ui-sref="tab.uploads-edit({ id:view.$id })">
 	           <img ng-src="{{view.photoURL}}">
 	           <h2>{{view.description}}</h2>
-	           <p>Uploaded by {{view.user}}</p>
+	           <p>Uploaded by {{view.userDisplay}}</p>
 	       </a>
 	    </div>
   	</ion-content>
