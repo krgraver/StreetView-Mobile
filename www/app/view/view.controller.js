@@ -13,14 +13,15 @@ angular.module('app')
 			var viewData = {
 				userEmail: user.email,
 				userDisplay: user.displayName,
-				photoURL: $scope.view.photoURL,
+				// photoURL: $scope.view.photoURL,
+				// viewPosition: $scope.view.position,
 				artType: $scope.view.artType,
 				description: $scope.view.description,
 				timeStamp: 1-Date.now(),
-				viewPosition: $scope.view.position
-			},
-			newPostKey = firebase.database().ref().child('views').push().key,
-			updates = {};
+				likeCount: 0
+			};
+			var newPostKey = firebase.database().ref().child('views').push().key;
+			var updates = {};
 
 			updates['/views/' + newPostKey] = viewData;
 			firebase.database().ref().update(updates);
@@ -119,6 +120,35 @@ angular.module('app')
 			var ref = firebase.database().ref('views/');
 
 			$scope.viewDetail = $firebaseObject(ref.child($stateParams.id));
+		}
+
+		// Like a view
+
+		$scope.likeView = function() {
+			var user = firebase.auth().currentUser;
+			var ref = firebase.database().ref().child('viewLikes');
+			var userRef = ref.child(user.uid);
+			var likeRef = userRef.child($stateParams.id);
+
+			likeRef.once('value', function(snapshot) {
+				var likeCount = firebase.database().ref('views/' + $stateParams.id + '/likeCount');
+
+				// Check if user has liked this view yet
+				if (snapshot.val()) {
+					likeRef.remove();
+					likeCount.transaction(function(currentCount) {
+						return currentCount - 1;
+					});
+				} else {
+					likeCount.transaction(function(currentCount) {
+						return currentCount + 1;
+					});
+					var view = {};
+					view[$stateParams.id] = true;
+					userRef.update(view);
+				}
+			});
+
 		}
 
 		// Edit View

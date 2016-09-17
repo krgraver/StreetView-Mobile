@@ -701,11 +701,11 @@ angular.module('app', ['ionic', 'ngCordova', 'firebase'])
         }
     })
 
-    .state('tab.views-detail', {
+    .state('tab.list-detail', {
         url: '/views-list/:id',
         views: {
             'tab-views-list': {
-                templateUrl: 'app/view/detail.html',
+                templateUrl: 'app/view/list-detail.html',
                 controller: 'ViewController'
             }
         }

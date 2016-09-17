@@ -21,6 +21,7 @@
 			<img ng-src="{{viewDetail.photoURL}}" class="image">
 		</div>
 		<h1>{{viewDetail.description}}</h1>
-		<p>Uploaded by {{viewDetail.user}}</p>
+		<p>Uploaded by {{viewDetail.userDisplay}}</p>
+		<button class="button button-full button-positive" ng-click="likeView()">{{viewDetail.likeCount}} Likes</button>
 	</ion-content>
 </ion-view>

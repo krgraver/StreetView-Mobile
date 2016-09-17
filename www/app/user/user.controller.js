@@ -1,6 +1,6 @@
 angular.module('app')
-	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', 
-		function($scope, $state, $http, $cordovaCamera) {
+	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', '$cordovaEmailComposer',
+		function($scope, $state, $http, $cordovaCamera, $cordovaEmailComposer) {
 
 		// Account setup
 
@@ -46,6 +46,15 @@ angular.module('app')
 			$scope.photoURL = user.photoURL;
 
 			$scope.$broadcast('scroll.refreshComplete');
+		}
+
+		// Open Email app on "Contact StreetView" button press
+
+		$scope.sendEmail = function() {
+			cordova.plugins.email.open({
+				to: 'kelly@snapmobile.io',
+    			subject: 'Hello StreetView!'
+			});
 		}
 
 		// Save user info
