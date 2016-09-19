@@ -1,4 +1,4 @@
-<ion-view view-title="Views List" ng-init="doRefresh()">
+<ion-view view-title="View Feed" ng-init="doRefresh()">
 	<script id="filter.html" type="text/ng-template">
 		<ion-modal-view>
 			<ion-header-bar>
@@ -20,10 +20,12 @@
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
         <div class="list">
-	       <a class="item item-thumbnail-left" ng-repeat="view in views" ui-sref="tab.list-detail({ id:view.$id })">
+	       <a class="item item-thumbnail-left" ng-repeat="view in views | reverse" ui-sref="tab.list-detail({ id:view.$id })">
 	           <img ng-src="{{view.photoURL}}">
 	           <h2>{{view.description}}</h2>
 	           <p>Uploaded by {{view.userDisplay}}</p>
+	           <p ng-show="view.likeCount !== 1">{{view.likeCount}} Likes</p>
+	           <p ng-hide="view.likeCount !== 1">{{view.likeCount}} Like</p>
 	       </a>
 	    </div>
     </ion-content>

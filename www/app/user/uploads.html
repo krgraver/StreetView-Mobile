@@ -5,10 +5,12 @@
   	<ion-content>
   		<ion-refresher pulling-text="Pull to refresh..." on-refresh="loadMyUploads()"></ion-refresher>
   		<div class="list">
-	       <a class="item item-thumbnail-left" ng-repeat="view in myUploads" ui-sref="tab.uploads-edit({ id:view.$id })">
+	       <a class="item item-thumbnail-left" ng-repeat="view in myUploads | reverse" ui-sref="tab.uploads-edit({ id:view.$id })">
 	           <img ng-src="{{view.photoURL}}">
 	           <h2>{{view.description}}</h2>
 	           <p>Uploaded by {{view.userDisplay}}</p>
+             <p ng-show="view.likeCount !== 1">{{view.likeCount}} Likes</p>
+             <p ng-hide="view.likeCount !== 1">{{view.likeCount}} Like</p>
 	       </a>
 	    </div>
   	</ion-content>

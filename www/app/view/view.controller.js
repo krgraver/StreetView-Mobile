@@ -1,4 +1,9 @@
 angular.module('app')
+	.filter('reverse', function() {
+		return function(items) {
+	      	return items.slice().reverse();
+	    };
+	})
 	.controller('ViewController', ['$scope', '$state', '$stateParams', '$ionicModal', '$http', '$firebaseArray', '$firebaseObject', '$cordovaCamera', 
 		function($scope, $state, $stateParams, $ionicModal, $http, $firebaseArray, $firebaseObject, $cordovaCamera) {
 
@@ -13,11 +18,11 @@ angular.module('app')
 			var viewData = {
 				userEmail: user.email,
 				userDisplay: user.displayName,
-				// photoURL: $scope.view.photoURL,
-				// viewPosition: $scope.view.position,
+				photoURL: $scope.view.photoURL,
+				viewPosition: $scope.view.position,
 				artType: $scope.view.artType,
 				description: $scope.view.description,
-				timeStamp: 1-Date.now(),
+				timeStamp: Date.now(),
 				likeCount: 0
 			};
 			var newPostKey = firebase.database().ref().child('views').push().key;
@@ -69,7 +74,7 @@ angular.module('app')
 		    if ($scope.applyFilter) {
 		    	ref = firebase.database().ref('views/').orderByChild('artType').equalTo($scope.applyFilter);
 		    } else {
-		    	ref = firebase.database().ref('views/').orderByChild('timeStamp');
+		    	ref = firebase.database().ref('views/');
 		    }
 			
 			$scope.views = $firebaseArray(ref);
@@ -200,7 +205,8 @@ angular.module('app')
 			                	{ visibility: 'off' }
 			              	]
 			            }
-			        ]
+			        ],
+			        disableDefaultUI: true
 		    	};
 
 		    	// Draw map around current location
@@ -239,13 +245,18 @@ angular.module('app')
 							viewMarker.infowindow = new google.maps.InfoWindow();
 
 							viewMarker.addListener('click', function() {
-								this.infowindow.setContent('<img src="' + viewsObject[view].photoURL + '" style="width:150px; height:150px"><br><strong>' + viewsObject[view].description + '</strong>');
+								this.infowindow.setContent('<img src="' 
+									+ viewsObject[view].photoURL 
+									+ '" style="width:150px; height:150px"><br><strong>' 
+									+ viewsObject[view].description 
+									+ '</strong><br><p>' 
+									+ viewsObject[view].likeCount 
+									+ ' Like(s)</p>');
 								this.infowindow.open(map, viewMarker);
 							});
 					  	}
 					})(view);
-
-		    	});
+		    	}); 
 
 		    };
 
@@ -255,6 +266,6 @@ angular.module('app')
 
 		    navigator.geolocation.getCurrentPosition(success, error, options);
 
-		}
+		} 
 		
 	}]);

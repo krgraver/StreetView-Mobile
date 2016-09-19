@@ -1,13 +1,25 @@
 <style type="text/css">
+
+	#wrapper {
+		position: relative;
+	}
+
 	.scroll, #map {
 		height: 100%;
+	}
+
+	#refresh {
+		position: absolute;
+		left: 10px;
+		bottom: 110px;
 	}
 </style>
 <ion-view view-title="Views Map" ng-init="initMap()">
   	<ion-nav-buttons side="right">
     	<a ui-sref="tab.views-new" class="button button-clear">Add View</a>
   	</ion-nav-buttons>
-  	<ion-content>
+  	<ion-content id="wrapper">
 		<div id="map"></div>
+		<button id="refresh" class="button button-stable" ng-click="initMap()">Refresh Map</button>
   	</ion-content>
 </ion-view>

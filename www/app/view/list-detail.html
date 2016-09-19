@@ -1,14 +1,3 @@
-<style type="text/css">
-	.image-container {
-		width: 200px;
-		height: 200px;
-	}
-
-	.image {
-		width: 100%;
-		height: 100%;
-	}
-</style>
 <ion-view view-title="" ng-init="getDetail()">
 	<ion-nav-buttons side="left">
     	<a class="button button-clear icon-left ion-chevron-left" ui-sref="tab.views-list">Back</a>
@@ -22,6 +11,7 @@
 		</div>
 		<h1>{{viewDetail.description}}</h1>
 		<p>Uploaded by {{viewDetail.userDisplay}}</p>
-		<button class="button button-full button-positive" ng-click="likeView()">{{viewDetail.likeCount}} Likes</button>
+		<button class="button button-full button-positive" ng-click="likeView()" ng-show="viewDetail.likeCount !== 1">{{viewDetail.likeCount}} Likes</button>
+		<button class="button button-full button-positive" ng-click="likeView()" ng-hide="viewDetail.likeCount !== 1">{{viewDetail.likeCount}} Like</button>
 	</ion-content>
 </ion-view>
