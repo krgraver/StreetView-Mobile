@@ -1,6 +1,6 @@
 angular.module('app')
-	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', '$cordovaEmailComposer',
-		function($scope, $state, $http, $cordovaCamera, $cordovaEmailComposer) {
+	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', '$cordovaEmailComposer', '$ionicPopup',
+		function($scope, $state, $http, $cordovaCamera, $cordovaEmailComposer, $ionicPopup) {
 
 		// Account setup
 
@@ -9,11 +9,25 @@ angular.module('app')
 		$scope.addUserInfo = function() {
 			var user = firebase.auth().currentUser;
 
-			user.updateProfile({
-			  	displayName: $scope.user.displayName,
-			  	photoURL: $scope.user.photoURL
-			});
-			$state.go('tab.views-map');
+			if (!$scope.user.displayName) {
+				var alertPopup = $ionicPopup.alert({
+			     	title: 'Missing Info!',
+			     	template: 'Please enter a display name'
+			   	});
+			   	alertPopup;
+			} else if (!$scope.user.photoURL) {
+				var alertPopup = $ionicPopup.alert({
+			     	title: 'Missing Info!',
+			     	template: 'Please create an avatar'
+			   	});
+			   	alertPopup;
+			} else {
+				user.updateProfile({
+				  	displayName: $scope.user.displayName,
+				  	photoURL: $scope.user.photoURL
+				});
+				$state.go('tab.views-map');
+			}
 		}
 
 		// Take Profile picture

@@ -4,8 +4,8 @@ angular.module('app')
 	      	return items.slice().reverse();
 	    };
 	})
-	.controller('ViewController', ['$scope', '$state', '$stateParams', '$ionicModal', '$http', '$firebaseArray', '$firebaseObject', '$cordovaCamera', 
-		function($scope, $state, $stateParams, $ionicModal, $http, $firebaseArray, $firebaseObject, $cordovaCamera) {
+	.controller('ViewController', ['$scope', '$state', '$stateParams', '$ionicModal', '$http', '$firebaseArray', '$firebaseObject', '$cordovaCamera', '$ionicPopup', 
+		function($scope, $state, $stateParams, $ionicModal, $http, $firebaseArray, $firebaseObject, $cordovaCamera, $ionicPopup) {
 
 		// Post view to server
 
@@ -14,24 +14,45 @@ angular.module('app')
 		$scope.types = ['Graffiti', 'Painting', 'Sculpture', 'Stencil', 'Other'];
 
 		$scope.uploadView = function() {
-			var user = firebase.auth().currentUser;
-			var viewData = {
-				userEmail: user.email,
-				userDisplay: user.displayName,
-				photoURL: $scope.view.photoURL,
-				viewPosition: $scope.view.position,
-				artType: $scope.view.artType,
-				description: $scope.view.description,
-				timeStamp: Date.now(),
-				likeCount: 0
-			};
-			var newPostKey = firebase.database().ref().child('views').push().key;
-			var updates = {};
 
-			updates['/views/' + newPostKey] = viewData;
-			firebase.database().ref().update(updates);
+			if (!$scope.view.photoURL) {
+				var alertPopup = $ionicPopup.alert({
+			     	title: 'Missing Info!',
+			     	template: 'Please upload a street art photo'
+			   	});
+			   	alertPopup;
+			} else if (!$scope.view.artType) {
+				var alertPopup = $ionicPopup.alert({
+			     	title: 'Missing Info!',
+			     	template: 'Please select an art type'
+			   	});
+			   	alertPopup;
+			} else if (!$scope.view.description) {
+				var alertPopup = $ionicPopup.alert({
+			     	title: 'Missing Info!',
+			     	template: 'Please add a description'
+			   	});
+			   	alertPopup;
+			} else {
+				var user = firebase.auth().currentUser;
+				var viewData = {
+					userEmail: user.email,
+					userDisplay: user.displayName,
+					photoURL: $scope.view.photoURL,
+					viewPosition: $scope.view.position,
+					artType: $scope.view.artType,
+					description: $scope.view.description,
+					timeStamp: Date.now(),
+					likeCount: 0
+				};
+				var newPostKey = firebase.database().ref().child('views').push().key;
+				var updates = {};
 
-			$state.go('tab.views-map');
+				updates['/views/' + newPostKey] = viewData;
+				firebase.database().ref().update(updates);
+
+				$state.go('tab.views-map');
+			}
 		}
 
 		// Take View pic

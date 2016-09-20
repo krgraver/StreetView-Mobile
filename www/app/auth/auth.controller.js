@@ -1,6 +1,6 @@
 angular.module('app')
-	.controller('AuthenticationController', ['$scope', '$state', '$http', 
-		function($scope, $state, $http) {
+	.controller('AuthenticationController', ['$scope', '$state', '$http', '$ionicPopup',
+		function($scope, $state, $http, $ionicPopup) {
 
 		// User Registration
 
@@ -13,7 +13,13 @@ angular.module('app')
 					$state.go('setup');
 				})
 				.catch(function(error) {
-					$scope.error = error.message;
+					if (error.code === 'auth/weak-password') {
+						var alertPopup = $ionicPopup.alert({
+					     	title: 'Oops!',
+					     	template: 'You can make a better password than that!'
+					   	});
+					   	alertPopup;
+					}
 				});
 		}
 
@@ -28,9 +34,15 @@ angular.module('app')
 					$state.go('tab.views-map');
 				})
 				.catch(function(error) {
-					$scope.error = error.message;
+					if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {
+						var alertPopup = $ionicPopup.alert({
+					     	title: 'Oops!',
+					     	template: 'Incorrect email or password'
+					   	});
+					   	alertPopup;
+					}
 				});
-		}
+		}   	
 
 		// Send password reset email
 
@@ -43,7 +55,13 @@ angular.module('app')
 					$state.go('login');
 				})
 				.catch(function(error) {
-					$scope.error = error.message;
+					if (error.code === 'auth/user-not-found') {
+						var alertPopup = $ionicPopup.alert({
+					     	title: 'Oops!',
+					     	template: "That email isn't registered"
+					   	});
+					   	alertPopup;
+					}
 				});
 		}
 	}]);
