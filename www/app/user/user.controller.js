@@ -35,13 +35,13 @@ angular.module('app')
 		$scope.getProfilePic = function () {
 	
 	    	var options = {
-		        quality: 75,
+		        quality: 50,
                 destinationType: navigator.camera.DestinationType.DATA_URL,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
                 encodingType: navigator.camera.EncodingType.JPEG,
                 allowEdit: true,
-                targetWidth: 300,
-                targetHeight: 300,
+                targetWidth: 500,
+                targetHeight: 500,
                 saveToPhotoAlbum: false
 	    	};
 

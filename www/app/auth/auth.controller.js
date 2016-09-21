@@ -31,7 +31,11 @@ angular.module('app')
 			firebase.auth()
 				.signInWithEmailAndPassword($scope.login.email, $scope.login.password)
 				.then(function() {
-					$state.go('tab.views-map');
+					if (!firebase.auth().currentUser.photoURL || !firebase.auth().currentUser.displayName) {
+						$state.go('setup');
+					} else {
+						$state.go('tab.views-map');
+					}
 				})
 				.catch(function(error) {
 					if (error.code === 'auth/wrong-password' || error.code === 'auth/user-not-found') {

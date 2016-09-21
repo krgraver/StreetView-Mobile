@@ -8,9 +8,7 @@
 	       <a class="item item-thumbnail-left" ng-repeat="view in myUploads | reverse" ui-sref="tab.uploads-edit({ id:view.$id })">
 	           <img ng-src="{{view.photoURL}}">
 	           <h2>{{view.description}}</h2>
-	           <p>Uploaded by {{view.userDisplay}}</p>
-             <p ng-show="view.likeCount !== 1">{{view.likeCount}} Likes</p>
-             <p ng-hide="view.likeCount !== 1">{{view.likeCount}} Like</p>
+             <p><ng-pluralize count="view.likeCount" when="{'1': '1 Like', 'other': '{{view.likeCount}} Likes'} "></ng-pluralize></p>
 	       </a>
 	    </div>
   	</ion-content>

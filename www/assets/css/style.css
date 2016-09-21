@@ -2,21 +2,59 @@
 /* -------------------- Global --------------------- */
 
 ion-content {
-	background-color: #464646;
+	background-color: #333333;
 }
+
+i {
+	margin-right: 5px;
+}
+
+/* -------------------- Text --------------------- */
 
 a {
 	color: #FFF;
 	text-decoration: none;
 }
 
-h1 {
+h1, h2 {
 	color: #FFF;
 }
 
 p {
 	color: #9B9B9B;
 }
+
+.title-center {
+	display: block;
+	text-align: center;
+	margin-bottom: 50px;
+}
+
+.signup {
+	float: left;
+	margin-left: 10%;
+	margin-top: 20px;
+}
+
+.forgot {
+	float: right;
+	margin-right: 10%;
+	margin-top: 20px;
+}
+
+.forgot-message {
+	display: block;
+	text-align: center;
+	margin: 40px;
+}
+
+.already-account, .cancel {
+	display: block;
+	text-align: center;
+	margin-top: 20px;
+}
+
+/* -------------------- Images --------------------- */
 
 .image-container {
 	width: 100%;
@@ -85,36 +123,36 @@ ion-tabs.tabs-color-active-positive .tab-item {
 /* -------------------- List Items --------------------- */
 
 .item {
-	background-color: #464646;
+	background-color: #333333;
 	border-color: #565656;
 }
 
-.item-thumbnail-left {
-	background-color: #464646;
+.item.activated {
+	background-color: #282828;
 	border-color: #565656;
 }
 
-.item-thumbnail-left.activated {
-	background-color: #3C3B3B;
-	border-color: #3C3B3B;
+.assertive {
+	background-color: #2C2C2C;
 }
 
-.item-thumbnail-left h2 {
-	color: #FFF;
+.assertive h2 {
+	width: 75%;
+	float: left;
 }
 
-.item-thumbnail-left p {
-	color: #9B9B9B;
+.assertive p {
+	float: right;
 }
 
 .item-complex .item-content, 
 .item-radio .item-content {
-	background-color: #464646;
+	background-color: #333333;
 	color: #FFF;
 }
 
 .item-radio input:checked + .radio-content .item-content {
-	background-color: #464646;
+	background-color: #333333;
 	border-color: #565656;
 }
 
@@ -148,11 +186,22 @@ input[type="color"] {
 
 .item-stacked-label input, 
 .item-stacked-label textarea {
-	background-color: #464646;
+	background-color: #333333;
 	color: white;
 }
 
+.item-select select {
+	background: transparent;
+	color: #FFF;
+}
+
 /* -------------------- Buttons --------------------- */
+
+.button.button-block {
+	width: 95%;
+	margin: 0 auto;
+	margin-top: 10px;
+}
 
 .button.button-positive {
 	background-color: #E42525;
@@ -162,12 +211,35 @@ input[type="color"] {
 	background-color: #CB1C1C;
 }
 
-.button.button-positive.button-outline {
-	color: #E42525;
-	border-color: #E42525;
+.button.button-positive.button-outline.activated {
+	background-color: #282828;
 }
 
 .button.button-stable {
 	border-color: #A9A9A9;
+}
+
+.button.button-stable.button-outline.activated {
+	background-color: #282828;
+}
+
+.bar .button.button-clear .icon:before, 
+.bar .button.button-clear.icon:before, 
+.bar .button.button-clear.icon-left:before, 
+.bar .button.button-clear.icon-right:before, 
+.bar button.button-clear .icon:before, 
+.bar button.button-clear.icon:before, 
+.bar button.button-clear.icon-left:before, 
+.bar button.button-clear.icon-right:before {
+	font-size: 18px;
+	margin-right: 5px;
+}
+
+.photo-button {
+	display: block;
+	width: 50%;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 

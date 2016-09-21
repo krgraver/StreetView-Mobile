@@ -38,6 +38,7 @@ angular.module('app')
 				var viewData = {
 					userEmail: user.email,
 					userDisplay: user.displayName,
+					userAvatar: user.photoURL,
 					photoURL: $scope.view.photoURL,
 					viewPosition: $scope.view.position,
 					artType: $scope.view.artType,
@@ -60,13 +61,13 @@ angular.module('app')
 		$scope.getViewPic = function () {
 	
 	    	var cameraOptions = {
-		        quality: 75,
+		        quality: 50,
                 destinationType: navigator.camera.DestinationType.DATA_URL,
                 sourceType: navigator.camera.PictureSourceType.CAMERA,
                 encodingType: navigator.camera.EncodingType.JPEG,
                 allowEdit: true,
-                targetWidth: 300,
-                targetHeight: 300,
+                targetWidth: 1000,
+                targetHeight: 1000,
                 saveToPhotoAlbum: false
 	    	};
 
@@ -90,6 +91,10 @@ angular.module('app')
 		// Initialize Views List and allow pull to refresh
 
 		$scope.doRefresh = function() {
+			if (!firebase.auth().currentUser) {
+				$state.go('login');
+			}
+
 		    var ref = {};
 
 		    if ($scope.applyFilter) {

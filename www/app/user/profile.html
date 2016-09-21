@@ -7,8 +7,8 @@
 		<div class="image-container">
 			<img ng-src="{{photoURL}}" class="image">
 		</div>
-		<h1>{{displayName}}</h1>
-		<button class="button button-block button-positive" ui-sref="tab.uploads">My Uploads</button>
-		<button class="button button-block button-positive" ng-click="sendEmail()">Contact StreetView</button>
+		<h1 class="title-center">{{displayName}}</h1>
+		<button class="button button-block button-outline button-stable" ui-sref="tab.uploads"><i class="icon ion-images"></i> My Uploads</button>
+		<button class="button button-block button-outline button-stable" ng-click="sendEmail()"><i class="icon ion-ios-email-outline"></i> Contact StreetView</button>
 	</ion-content>
 </ion-view>

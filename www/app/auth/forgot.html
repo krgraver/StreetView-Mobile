@@ -1,12 +1,12 @@
 <ion-view view-title="Forgot Password" hide-nav-bar="true">
     <ion-content>
-    	<p>Forgot your password? No Problem! Just enter the email you used to make an account and we will send you an email to reset your password.</p>
+    	<p class="forgot-message">Forgot your password? No Problem! Just enter the email you used to make an account and we will send you an email to reset your password.</p>
   		<div class="list list-inset">
 		    <label class="item item-input">
 		    	<input type="email" placeholder="Email" ng-model="forgot.email">
 		    </label>
 		</div>
 		<button class="button button-block button-positive" ng-click="sendResetEmail()">Send Reset Email</button>
-		<a ui-sref="login">Cancel</a>
+		<a class="cancel" ui-sref="login">Cancel</a>
     </ion-content>
 </ion-view>

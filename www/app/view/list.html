@@ -8,7 +8,7 @@
 		    <ion-content>
 		    	<ion-list>
 		    		<ion-radio ng-repeat="type in types" ng-model="filter.type" value="{{type}}">{{type}}</ion-radio>
-		    		<ion-radio ng-model="filter.type" value="None">No Filter</ion-radio>
+		    		<ion-radio ng-model="filter.type" value="None"> - No Filter - </ion-radio>
 				</ion-list>
 				<button class="button button-block button-positive" ng-click="saveFilter(); doRefresh()">Save</button>
 		    </ion-content>
@@ -19,14 +19,16 @@
   	</ion-nav-buttons>
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
-        <div class="list">
-	       <a class="item item-thumbnail-left" ng-repeat="view in views | reverse" ui-sref="tab.list-detail({ id:view.$id })">
-	           <img ng-src="{{view.photoURL}}">
-	           <h2>{{view.description}}</h2>
-	           <p>Uploaded by {{view.userDisplay}}</p>
-	           <p ng-show="view.likeCount !== 1">{{view.likeCount}} Likes</p>
-	           <p ng-hide="view.likeCount !== 1">{{view.likeCount}} Like</p>
-	       </a>
-	    </div>
+
+	    <div class="list card" ng-repeat="view in views | reverse" ui-sref="tab.list-detail({ id:view.$id })">
+    		<div class="item item-image">
+		    	<img ng-src="{{view.photoURL}}">
+		  	</div>
+		  	<div class="item assertive">
+		    	<h2>{{view.description}}</h2>
+	           	<p><ng-pluralize count="view.likeCount" when="{'1': '1 Like', 'other': '{{view.likeCount}} Likes'} "></ng-pluralize></p>
+		  	</div>
+		</div>
+
     </ion-content>
 </ion-view>

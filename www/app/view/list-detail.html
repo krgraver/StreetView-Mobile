@@ -9,9 +9,8 @@
 		<div class="image-container">
 			<img ng-src="{{viewDetail.photoURL}}" class="image">
 		</div>
-		<h1>{{viewDetail.description}}</h1>
+		<h2>{{viewDetail.description}}</h2>
 		<p>Uploaded by {{viewDetail.userDisplay}}</p>
-		<button class="button button-full button-positive" ng-click="likeView()" ng-show="viewDetail.likeCount !== 1">{{viewDetail.likeCount}} Likes</button>
-		<button class="button button-full button-positive" ng-click="likeView()" ng-hide="viewDetail.likeCount !== 1">{{viewDetail.likeCount}} Like</button>
+		<button class="button button-outline button-stable button-block like-button" ng-click="likeView()"><i class="icon ion-thumbsup"></i> <ng-pluralize count="viewDetail.likeCount" when="{'1': '1 Like', 'other': '{{viewDetail.likeCount}} Likes'} "></ng-pluralize></button>
 	</ion-content>
 </ion-view>

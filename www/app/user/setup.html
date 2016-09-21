@@ -2,7 +2,7 @@
     <ion-content>
 	  	<div class="list">
 	  		<img ng-src="{{user.photoURL}}" ng-show="user.photoURL">
-	  		<button class="button button-stable" ng-click="getProfilePic()">Create Avatar</button>
+	  		<button class="button button-outline button-stable photo-button" ng-click="getProfilePic()"><i class="icon ion-ios-camera-outline"></i> Create Avatar</button>
 			<label class="item item-input item-floating-label">
 			    <span class="input-label">Display Name</span>
 			    <input type="text" placeholder="Display Name" ng-model="user.displayName">
