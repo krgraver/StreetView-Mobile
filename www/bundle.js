@@ -626,9 +626,7 @@ angular.module('app', ['ionic', 'ngCordova', 'firebase'])
     });
 })
 
-.config(function($stateProvider, $urlRouterProvider, $ionicConfigProvider) {
-
-    $ionicConfigProvider.tabs.position('bottom');
+.config(function($stateProvider, $urlRouterProvider) {
 
     // Ionic uses AngularUI Router which uses the concept of states
     // Learn more here: https://github.com/angular-ui/ui-router
@@ -661,6 +659,14 @@ angular.module('app', ['ionic', 'ngCordova', 'firebase'])
     .state('setup', {
         url: '/setup',
         templateUrl: 'app/user/setup.html',
+        controller: 'UserController'
+    })
+
+    // Onboarding
+
+    .state('onboarding', {
+        url: '/onboarding',
+        templateUrl: 'app/user/onboarding.html',
         controller: 'UserController'
     })
 

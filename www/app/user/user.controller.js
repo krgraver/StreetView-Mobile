@@ -26,9 +26,21 @@ angular.module('app')
 				  	displayName: $scope.user.displayName,
 				  	photoURL: $scope.user.photoURL
 				});
-				$state.go('tab.views-map');
+				$state.go('onboarding');
 			}
 		}
+
+		// Onboarding
+
+		$scope.options = {
+		  	loop: false,
+		  	speed: 500,
+		}
+
+		$scope.$on("$ionicSlides.sliderInitialized", function(event, data){
+		  	// data.slider is the instance of Swiper
+		  	$scope.slider = data.slider;
+		});
 
 		// Take Profile picture
 

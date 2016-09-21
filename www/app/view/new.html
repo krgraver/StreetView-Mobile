@@ -4,7 +4,7 @@
   	</ion-nav-buttons>
   	<ion-content>
   		<div class="image-container" ng-show="view.photoURL">
-			<img ng-src="{{view.photoURL}}" class="image">
+			<img ng-src="{{view.photoURL}}">
 		</div>
   		<button class="button button-outline button-stable photo-button" ng-click="getViewPic()"><i class="icon ion-ios-camera-outline"></i> Take Photo</button>
   		<div class="list">
@@ -20,6 +20,6 @@
 		    	<input type="text" placeholder="Description" ng-model="view.description">
 		  	</label>
 		</div>
-		<button class="button button-block button-positive" ng-click="uploadView(); initMap()">Submit</button>
+		<button class="button button-block button-positive bottom-buffer" ng-click="uploadView(); initMap()">Submit</button>
   	</ion-content>
 </ion-view>

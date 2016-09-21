@@ -98,9 +98,9 @@ angular.module('app')
 		    var ref = {};
 
 		    if ($scope.applyFilter) {
-		    	ref = firebase.database().ref('views/').orderByChild('artType').equalTo($scope.applyFilter);
+		    	ref = firebase.database().ref('views/').orderByChild('artType').equalTo($scope.applyFilter).limitToLast(100);
 		    } else {
-		    	ref = firebase.database().ref('views/');
+		    	ref = firebase.database().ref('views/').limitToLast(100);
 		    }
 			
 			$scope.views = $firebaseArray(ref);
@@ -190,9 +190,38 @@ angular.module('app')
 			ref.update({ description: $scope.newInfo.description});
 		}
 
-		$scope.deleteView = function() {
-			var ref = firebase.database().ref('views/' + $stateParams.id);
-			ref.remove();
+		// Delete View from List
+
+		$scope.deleteViewList = function() {
+			var confirmPopup = $ionicPopup.confirm({
+		     	title: 'Whoa!',
+		     	template: "Are you sure you want to delete this view? This can't be undone..."
+		   	});
+
+		   	confirmPopup.then(function(res) {
+		     	if(res) {
+		       		var ref = firebase.database().ref('views/' + $stateParams.id);
+					ref.remove();
+					$state.go('tab.views-list');
+		     	}
+		   	});
+		}
+
+		// Delete View from Uploads
+
+		$scope.deleteViewUploads = function() {
+			var confirmPopup = $ionicPopup.confirm({
+		     	title: 'Whoa!',
+		     	template: "Are you sure you want to delete this view? This can't be undone..."
+		   	});
+
+		   	confirmPopup.then(function(res) {
+		     	if(res) {
+		       		var ref = firebase.database().ref('views/' + $stateParams.id);
+					ref.remove();
+					$state.go('tab.uploads');
+		     	}
+		   	});
 		}
 
 
