@@ -19,6 +19,12 @@ angular.module('app')
 					     	template: 'You can make a better password than that!'
 					   	});
 					   	alertPopup;
+					} else if (error.code === 'auth/email-already-in-use') {
+						var alertPopup = $ionicPopup.alert({
+					     	title: 'Oops!',
+					     	template: 'This email already has an account'
+					   	});
+					   	alertPopup;
 					}
 				});
 		}

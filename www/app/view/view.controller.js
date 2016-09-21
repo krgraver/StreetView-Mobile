@@ -33,6 +33,12 @@ angular.module('app')
 			     	template: 'Please add a description'
 			   	});
 			   	alertPopup;
+			}  else if ($scope.view.description.length > 40) {
+				var alertPopup = $ionicPopup.alert({
+			     	title: 'Too long!',
+			     	template: 'Please make your description 40 characters or less'
+			   	});
+			   	alertPopup;
 			} else {
 				var user = firebase.auth().currentUser;
 				var viewData = {
@@ -302,9 +308,9 @@ angular.module('app')
 							viewMarker.addListener('click', function() {
 								this.infowindow.setContent('<img src="' 
 									+ viewsObject[view].photoURL 
-									+ '" style="width:150px; height:150px"><br><strong>' 
+									+ '" style="width:150px; height:150px"><strong style="display:block; width:150px">' 
 									+ viewsObject[view].description 
-									+ '</strong><br><p>' 
+									+ '</strong><p>' 
 									+ viewsObject[view].likeCount 
 									+ ' Like(s)</p>');
 								this.infowindow.open(map, viewMarker);

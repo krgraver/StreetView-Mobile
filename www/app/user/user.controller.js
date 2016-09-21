@@ -59,6 +59,7 @@ angular.module('app')
 
 	    	$cordovaCamera.getPicture(options).then(function(imageData) {
 	        	$scope.user.photoURL = "data:image/jpeg;base64," + imageData;
+	        	$scope.photoURL = $scope.user.photoURL; //needed when updating avatar in Edit Profile
 	    	}, function(err) {
 	        	console.log(err);
 	    	});
