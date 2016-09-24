@@ -50,6 +50,14 @@ p {
 	overflow: visible;
 }
 
+.feed-helper {
+	width: 80%;
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 5px;
+	margin-bottom: 5px;
+}
+
 .title-center {
 	font-family: 
 	display: block;
@@ -104,6 +112,14 @@ p {
 
 .view-title {
 	font-size: 18px;
+}
+
+.popup {
+	font-family: 'Avenir', sans-serif;
+}
+
+.popup h3 {
+	font-weight: 500;
 }
 
 /* -------------------- Images --------------------- */
@@ -342,6 +358,7 @@ input[type="color"] {
 
 .button.button-positive {
 	background-color: #E42525;
+	margin-top: 50px;
 }
 
 .button.button-positive.activated {
@@ -371,7 +388,10 @@ input[type="color"] {
 .bar button.button-clear.icon-right:before {
 	font-size: 18px;
 	margin-right: 5px;
+	line-height: 26px;
 }
+
+
 
 .bar .button.button-clear, 
 .bar button.button-clear {
@@ -390,7 +410,15 @@ input[type="color"] {
 	margin-bottom: 70px;
 }
 
-/* ---------------------- Onboarding -------------------- */
+.popup-buttons .button.button-positive {
+	margin-top: 10px;
+}
+
+.popup-buttons .button.button-default {
+	margin-top: 10px;
+}
+
+/* ---------------------- Onboarding / Empty States -------------------- */
 
 .photo-onboarding {
 	padding: 10px;
@@ -404,20 +432,39 @@ input[type="color"] {
 	margin-bottom: 20px;
 }
 
-.photo-onboarding p, .map-onboarding p {
-	width: 80%;
+.photo-onboarding p, 
+.map-onboarding p, 
+.report-onboarding p,
+.empty-state p {
+	width: 85%;
 	text-align: center;
 	margin: 0 auto;
-	margin-bottom: 40px;
+	margin-bottom: 30px;
 	font-size: 16px;
 	line-height: 24px;
 }
 
 .map-onboarding img {
 	display: block;
-	width: 80%;
+	width: 90%;
+	margin: 0 auto;
+	margin-top: 70px;
+	margin-bottom: 20px;
+}
+
+.report-onboarding img {
+	display: block;
+	width: 60%;
 	margin: 0 auto;
 	margin-top: 30px;
 	margin-bottom: 20px;
+}
+
+.empty-state img {
+	display: block;
+	width: 50%;
+	margin: 0 auto;
+	margin-top: 20px;
+	margin-bottom: 30px;
 }
 

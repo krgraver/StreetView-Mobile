@@ -104,9 +104,9 @@ angular.module('app')
 		    var ref = {};
 
 		    if ($scope.applyFilter) {
-		    	ref = firebase.database().ref('views/').orderByChild('artType').equalTo($scope.applyFilter).limitToLast(100);
+		    	ref = firebase.database().ref('views/').orderByChild('artType').equalTo($scope.applyFilter).limitToLast(150);
 		    } else {
-		    	ref = firebase.database().ref('views/').limitToLast(100);
+		    	ref = firebase.database().ref('views/').limitToLast(150);
 		    }
 			
 			$scope.views = $firebaseArray(ref);
@@ -120,6 +120,7 @@ angular.module('app')
 		    var ref = firebase.database().ref('views/').orderByChild('userEmail').equalTo(user.email);
 			
 			$scope.myUploads = $firebaseArray(ref);
+			console.log($scope.myUploads);
 			$scope.$broadcast('scroll.refreshComplete');
 		}
 
@@ -186,6 +187,18 @@ angular.module('app')
 				}
 			});
 
+		}
+
+		// Open Email app on "Report as Inappropriate" button press
+
+		$scope.reportView = function() {
+			cordova.plugins.email.open({
+				to: 'kelly@snapmobile.io',
+    			subject: 'Reporting a View',
+    			body: 'I want to report View ID ' 
+    			+ $stateParams.id 
+    			+ ' as being inappropriate! The reason I think this is because: '
+			});
 		}
 
 		// Edit View

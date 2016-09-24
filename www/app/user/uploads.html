@@ -4,12 +4,18 @@
   	</ion-nav-buttons>
   	<ion-content>
   		<ion-refresher pulling-text="Pull to refresh..." on-refresh="loadMyUploads()"></ion-refresher>
+        <div class="empty-state" ng-show="myUploads == ''">
+            <img src="assets/images/uploads-graphic.png">
+            <p>
+                Really? No uploads? That street art isn't going to appreciate itself, you know...
+            </p>
+        </div>
   		<div class="list">
-	       <a class="item item-thumbnail-left" ng-repeat="view in myUploads | reverse" ui-sref="tab.uploads-edit({ id:view.$id })">
-	           <img ng-src="{{view.photoURL}}">
-	           <h2>{{view.description}}</h2>
-             <p><ng-pluralize count="view.likeCount" when="{'1': '1 Like', 'other': '{{view.likeCount}} Likes'} "></ng-pluralize></p>
-	       </a>
+	        <a class="item item-thumbnail-left" ng-repeat="view in myUploads | reverse" ui-sref="tab.uploads-edit({ id:view.$id })">
+	            <img ng-src="{{view.photoURL}}">
+	            <h2>{{view.description}}</h2>
+                <p><ng-pluralize count="view.likeCount" when="{'1': '1 Like', 'other': '{{view.likeCount}} Likes'} "></ng-pluralize></p>
+	        </a>
 	    </div>
   	</ion-content>
 </ion-view>

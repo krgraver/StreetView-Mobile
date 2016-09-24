@@ -18,6 +18,7 @@
 				<p class="uploader-text">Uploaded by {{viewDetail.userDisplay}}</p>
 			</div>
 		</div>
-		<button class="button button-outline button-stable button-block bottom-buffer" ng-click="likeView()"><i class="icon ion-thumbsup"></i> <ng-pluralize count="viewDetail.likeCount" when="{'1': '1 Like', 'other': '{{viewDetail.likeCount}} Likes'} "></ng-pluralize></button>
+		<button class="button button-outline button-stable button-block" ng-click="likeView()"><i class="icon ion-thumbsup"></i> <ng-pluralize count="viewDetail.likeCount" when="{'1': '1 Like', 'other': '{{viewDetail.likeCount}} Likes'} "></ng-pluralize></button>
+		<button class="button button-outline button-stable button-block bottom-buffer" ng-click="reportView()"><i class="icon ion-alert-circled"></i> Report as Inappropriate</ng-pluralize></button>
 	</ion-content>
 </ion-view>

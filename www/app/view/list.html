@@ -19,7 +19,14 @@
   	</ion-nav-buttons>
     <ion-content>
         <ion-refresher pulling-text="Pull to refresh..." on-refresh="doRefresh()"></ion-refresher>
+		<p class="feed-helper">Pull down to refresh</p>
 
+		<div class="empty-state" ng-show="views == ''">
+            <img src="assets/images/uploads-graphic.png">
+            <p>
+                Well, this is embarrassing... Looks like people haven't been uploading that type of art recently.
+            </p>
+        </div>
 	    <div class="list card" ng-repeat="view in views | reverse" ui-sref="tab.list-detail({ id:view.$id })">
     		<div class="item item-image">
 		    	<img ng-src="{{view.photoURL}}">
@@ -30,5 +37,6 @@
 		  	</div>
 		</div>
 
+		<p class="feed-helper" ng-hide="views == ''">Feed limited to 150 latest uploads</p>
     </ion-content>
 </ion-view>
