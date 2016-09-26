@@ -621,7 +621,7 @@ angular.module('app', ['ionic', 'ngCordova', 'firebase'])
         }
         if (window.StatusBar) {
             // org.apache.cordova.statusbar required
-            StatusBar.styleDefault();
+            StatusBar.styleLightContent();
         }
     });
 })

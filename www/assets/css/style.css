@@ -24,6 +24,14 @@ i {
 	margin-right: 5px;
 }
 
+.wrapper {
+	position: relative;
+}
+
+.scroll, #map {
+	height: 100%;
+}
+
 /* -------------------- Text --------------------- */
 
 .bar.bar-stable .title {
@@ -391,7 +399,11 @@ input[type="color"] {
 	line-height: 26px;
 }
 
-
+#refresh {
+	position: absolute;
+	left: 10px;
+	bottom: 120px;
+}
 
 .bar .button.button-clear, 
 .bar button.button-clear {
