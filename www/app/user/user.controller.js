@@ -69,6 +69,7 @@ angular.module('app')
 
 		$scope.showProfile = function() {
 			var user = firebase.auth().currentUser;
+			$scope.email = user.email;
 			$scope.displayName = user.displayName;
 			$scope.photoURL = user.photoURL;
 

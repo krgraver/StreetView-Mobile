@@ -1,6 +1,6 @@
 <ion-view view-title="Profile" ng-init="showProfile()">
 	<ion-nav-buttons side="right">
-    	<a class="button button-clear" ui-sref="tab.profile-edit">Edit</a>
+    	<a class="button button-clear ion-edit" ui-sref="tab.profile-edit"></a>
   	</ion-nav-buttons>
 	<ion-content overflow-scroll="false">
 		<ion-refresher pulling-text="Pull to refresh..." on-refresh="showProfile()"></ion-refresher>
@@ -11,6 +11,7 @@
 			<img ng-src="{{photoURL}}">
 		</div>
 		<h1 class="title-center">{{displayName}}</h1>
+		<h2 class="subtitle-center">{{email}}</h2>
 		<button class="button button-block button-outline button-stable" ui-sref="tab.uploads"><i class="icon ion-images"></i> My Uploads</button>
 		<button class="button button-block button-outline button-stable" ng-click="sendEmail()"><i class="icon ion-ios-email-outline"></i> Contact StreetView</button>
 	</ion-content>

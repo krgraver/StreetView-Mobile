@@ -67,10 +67,17 @@ p {
 }
 
 .title-center {
-	font-family: 
 	display: block;
 	text-align: center;
 	margin-top: 40px;
+	margin-bottom: 5px;
+}
+
+.subtitle-center {
+	font-size: 18px;
+	color: #9B9B9B;
+	display: block;
+	text-align: center;
 	margin-bottom: 50px;
 }
 
@@ -366,7 +373,7 @@ input[type="color"] {
 
 .button.button-positive {
 	background-color: #E42525;
-	margin-top: 50px;
+	margin-top: 30px;
 }
 
 .button.button-positive.activated {
@@ -438,9 +445,9 @@ input[type="color"] {
 
 .photo-onboarding img {
 	display: block;
-	width: 60%;
+	width: 45%;
 	margin: 0 auto;
-	margin-top: 30px;
+	margin-top: 40px;
 	margin-bottom: 20px;
 }
 
@@ -448,10 +455,10 @@ input[type="color"] {
 .map-onboarding p, 
 .report-onboarding p,
 .empty-state p {
-	width: 85%;
+	width: 90%;
 	text-align: center;
 	margin: 0 auto;
-	margin-bottom: 30px;
+	margin-bottom: 20px;
 	font-size: 16px;
 	line-height: 24px;
 }
@@ -466,10 +473,10 @@ input[type="color"] {
 
 .report-onboarding img {
 	display: block;
-	width: 60%;
+	width: 55%;
 	margin: 0 auto;
-	margin-top: 30px;
-	margin-bottom: 20px;
+	margin-top: 20px;
+	margin-bottom: 15px;
 }
 
 .empty-state img {
