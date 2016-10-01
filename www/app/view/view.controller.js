@@ -321,7 +321,7 @@ angular.module('app')
 							viewMarker.addListener('click', function() {
 								this.infowindow.setContent('<img src="' 
 									+ viewsObject[view].photoURL 
-									+ '" style="width:200px; height:200px"><strong style="display:block; width:150px">' 
+									+ '" style="width:200px; height:200px"><strong style="display:block; width:200px">' 
 									+ viewsObject[view].description 
 									+ '</strong><p>' 
 									+ viewsObject[view].likeCount 
