@@ -49,7 +49,7 @@ angular.module('app')
 	    	var options = {
 		        quality: 50,
                 destinationType: navigator.camera.DestinationType.DATA_URL,
-                sourceType: navigator.camera.PictureSourceType.CAMERA,
+                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
                 encodingType: navigator.camera.EncodingType.JPEG,
                 allowEdit: true,
                 targetWidth: 500,
