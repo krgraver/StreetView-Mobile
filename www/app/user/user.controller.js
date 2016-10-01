@@ -1,6 +1,6 @@
 angular.module('app')
-	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', '$cordovaEmailComposer', '$ionicPopup',
-		function($scope, $state, $http, $cordovaCamera, $cordovaEmailComposer, $ionicPopup) {
+	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', '$cordovaEmailComposer', '$ionicPopup', '$ionicModal',
+		function($scope, $state, $http, $cordovaCamera, $cordovaEmailComposer, $ionicPopup, $ionicModal) {
 
 		// Account setup
 
@@ -74,6 +74,23 @@ angular.module('app')
 			$scope.photoURL = user.photoURL;
 
 			$scope.$broadcast('scroll.refreshComplete');
+		}
+
+		// Upload guidelines modal
+
+		$ionicModal.fromTemplateUrl('guidelines.html', {
+		    scope: $scope,
+		    animation: 'slide-in-up'
+		}).then(function(modal) {
+			$scope.modal = modal;
+		});
+
+		$scope.openModal = function() {
+		    $scope.modal.show();
+		}
+
+		$scope.closeModal = function() {
+		    $scope.modal.hide();
 		}
 
 		// Open Email app on "Contact StreetView" button press

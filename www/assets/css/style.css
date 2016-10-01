@@ -137,6 +137,33 @@ p {
 	font-weight: 500;
 }
 
+ol {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 30px;
+	list-style: initial;
+	list-style-type: decimal;
+	color: #9B9B9B;
+	font-size: 18px;
+	line-height: 24px;
+}
+
+ol li {
+	margin-bottom: 20px;
+}
+
+ol li em {
+	color: #E42525;
+	font-style: italic;
+}
+
+.fine-print {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 50px;
+	text-align: center;
+}
+
 /* -------------------- Images --------------------- */
 
 .logo {

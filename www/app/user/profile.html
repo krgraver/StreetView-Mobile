@@ -1,4 +1,28 @@
 <ion-view view-title="Profile" ng-init="showProfile()">
+	<script id="guidelines.html" type="text/ng-template">
+		<ion-modal-view>
+			<ion-header-bar>
+		      	<button class="button button-clear" ng-click="closeModal()">Close</button>
+		      	<h1 class="title">Upload Guidelines</h1>
+		    </ion-header-bar>
+		    <ion-content>
+		    	<ol>
+		    		<li>
+		    			Only take photos of <em>art</em>, anything else will be removed.
+		    		</li>
+		    		<li>
+		    			Uploaded art should be <em>high-quality</em> and <em>long-lasting</em>. 
+		    		</li>
+		    		<li>
+		    			Uploaded art needs to be <em>outside</em>. Users should be able to walk up to it for <em>free</em>. 
+		    		</li>
+		    	</ol>
+		    	<p class="fine-print">
+		    		StreetView reserves the right to delete accounts that repeatedly ignore these guidelines. 
+		    	</p>
+		    </ion-content>
+		</ion-modal-view>
+	</script>
 	<ion-nav-buttons side="right">
     	<a class="button button-clear ion-edit" ui-sref="tab.profile-edit"></a>
   	</ion-nav-buttons>
@@ -13,6 +37,7 @@
 		<h1 class="title-center">{{displayName}}</h1>
 		<h2 class="subtitle-center">{{email}}</h2>
 		<button class="button button-block button-outline button-stable" ui-sref="tab.uploads"><i class="icon ion-images"></i> My Uploads</button>
+		<button class="button button-block button-outline button-stable" ng-click="openModal()"><i class="icon ion-android-done-all"></i> Upload Guidelines</button>
 		<button class="button button-block button-outline button-stable" ng-click="sendEmail()"><i class="icon ion-ios-email-outline"></i> Contact StreetView</button>
 	</ion-content>
 </ion-view>
