@@ -1,6 +1,6 @@
 angular.module('app')
-	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', '$cordovaEmailComposer', '$ionicPopup', '$ionicModal',
-		function($scope, $state, $http, $cordovaCamera, $cordovaEmailComposer, $ionicPopup, $ionicModal) {
+	.controller('UserController', ['$scope', '$state', '$http', '$cordovaCamera', '$cordovaEmailComposer', '$ionicPopup', '$ionicModal', '$ionicActionSheet',
+		function($scope, $state, $http, $cordovaCamera, $cordovaEmailComposer, $ionicPopup, $ionicModal, $ionicActionSheet) {
 
 		// Account setup
 
@@ -42,28 +42,87 @@ angular.module('app')
 		  	$scope.slider = data.slider;
 		});
 
+		// Avatar action sheet
+
+		$scope.showActionSheet = function() {
+
+			$ionicActionSheet.show({
+				buttons: [
+					{ text: 'Take Photo'},
+					{ text: 'Choose from Library'}
+				],
+				cancelText: 'Cancel',
+				cancel: function() {
+					hideSheet();
+				},
+				buttonClicked: function(index) {
+					switch(index) {
+						case 0:
+							var options = {
+						        quality: 50,
+				                destinationType: navigator.camera.DestinationType.DATA_URL,
+				                sourceType: navigator.camera.PictureSourceType.CAMERA,
+				                encodingType: navigator.camera.EncodingType.JPEG,
+				                allowEdit: true,
+				                targetWidth: 500,
+				                targetHeight: 500,
+				                saveToPhotoAlbum: false
+					    	};
+
+					    	$cordovaCamera.getPicture(options).then(function(imageData) {
+					        	$scope.user.photoURL = "data:image/jpeg;base64," + imageData;
+					        	$scope.photoURL = $scope.user.photoURL; //needed when updating avatar in Edit Profile
+					    	}, function(err) {
+					        	console.log(err);
+					    	});
+					    	return true;
+
+					    case 1:
+					    	var options = {
+						        quality: 50,
+				                destinationType: navigator.camera.DestinationType.DATA_URL,
+				                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+				                encodingType: navigator.camera.EncodingType.JPEG,
+				                allowEdit: true,
+				                targetWidth: 500,
+				                targetHeight: 500,
+				                saveToPhotoAlbum: false
+					    	};
+
+					    	$cordovaCamera.getPicture(options).then(function(imageData) {
+					        	$scope.user.photoURL = "data:image/jpeg;base64," + imageData;
+					        	$scope.photoURL = $scope.user.photoURL; //needed when updating avatar in Edit Profile
+					    	}, function(err) {
+					        	console.log(err);
+					    	});
+					    	return true;
+					}
+				}
+			});
+		}
+
 		// Take Profile picture
 
-		$scope.getProfilePic = function () {
+		// $scope.getProfilePic = function () {
 	
-	    	var options = {
-		        quality: 50,
-                destinationType: navigator.camera.DestinationType.DATA_URL,
-                sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-                encodingType: navigator.camera.EncodingType.JPEG,
-                allowEdit: true,
-                targetWidth: 500,
-                targetHeight: 500,
-                saveToPhotoAlbum: false
-	    	};
+	 //    	var options = {
+		//         quality: 50,
+  //               destinationType: navigator.camera.DestinationType.DATA_URL,
+  //               sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
+  //               encodingType: navigator.camera.EncodingType.JPEG,
+  //               allowEdit: true,
+  //               targetWidth: 500,
+  //               targetHeight: 500,
+  //               saveToPhotoAlbum: false
+	 //    	};
 
-	    	$cordovaCamera.getPicture(options).then(function(imageData) {
-	        	$scope.user.photoURL = "data:image/jpeg;base64," + imageData;
-	        	$scope.photoURL = $scope.user.photoURL; //needed when updating avatar in Edit Profile
-	    	}, function(err) {
-	        	console.log(err);
-	    	});
-	    }; 
+	 //    	$cordovaCamera.getPicture(options).then(function(imageData) {
+	 //        	$scope.user.photoURL = "data:image/jpeg;base64," + imageData;
+	 //        	$scope.photoURL = $scope.user.photoURL; //needed when updating avatar in Edit Profile
+	 //    	}, function(err) {
+	 //        	console.log(err);
+	 //    	});
+	 //    }; 
 
 		// Show info in profile
 
