@@ -248,6 +248,7 @@ angular.module('app')
 		// Google Maps
 		
 		$scope.initMap = function() {
+			
 		    var options = {
 		    	timeout: 10000,
 		    	enableHighAccuracy: true
@@ -332,7 +333,6 @@ angular.module('app')
 					  	}
 					})(view);
 		    	}); 
-
 		    };
 
 		    function error(err) {
