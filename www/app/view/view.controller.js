@@ -4,8 +4,20 @@ angular.module('app')
 	      	return items.slice().reverse();
 	    };
 	})
-	.controller('ViewController', ['$scope', '$state', '$stateParams', '$ionicModal', '$http', '$firebaseArray', '$firebaseObject', '$cordovaCamera', '$ionicPopup', 
-		function($scope, $state, $stateParams, $ionicModal, $http, $firebaseArray, $firebaseObject, $cordovaCamera, $ionicPopup) {
+	.controller('ViewController', ['$scope', '$state', '$stateParams', '$ionicModal', '$http', '$firebaseArray', '$firebaseObject', '$cordovaCamera', '$ionicPopup', '$ionicLoading', 
+		function($scope, $state, $stateParams, $ionicModal, $http, $firebaseArray, $firebaseObject, $cordovaCamera, $ionicPopup, $ionicLoading) {
+
+		// Loading indicators
+
+		$scope.show = function() {
+		    $ionicLoading.show({
+		    	template: '<ion-spinner icon="spiral"></ion-spinner>'
+		    });
+		};
+
+		$scope.hide = function(){
+			$ionicLoading.hide();
+		};
 
 		// Post view to server
 
@@ -248,6 +260,8 @@ angular.module('app')
 		// Google Maps
 		
 		$scope.initMap = function() {
+
+			$scope.show($ionicLoading);
 			
 		    var options = {
 		    	timeout: 10000,
@@ -332,6 +346,8 @@ angular.module('app')
 							});
 					  	}
 					})(view);
+
+					$scope.hide($ionicLoading);
 		    	}); 
 		    };
 
