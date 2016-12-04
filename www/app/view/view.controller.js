@@ -218,9 +218,11 @@ angular.module('app')
 		$scope.newInfo = {};
 		$scope.updateView = function() {
 			var ref = firebase.database().ref('views/' + $stateParams.id);
+			
 			if ($scope.newInfo.artType) {
 				ref.update({ artType: $scope.newInfo.artType});
-			} else if ($scope.newInfo.description) {
+			}
+			if ($scope.newInfo.description) {
 				ref.update({ description: $scope.newInfo.description});
 			}
 		}
