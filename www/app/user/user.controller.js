@@ -101,29 +101,6 @@ angular.module('app')
 			});
 		}
 
-		// Take Profile picture
-
-		// $scope.getProfilePic = function () {
-	
-	 //    	var options = {
-		//         quality: 50,
-  //               destinationType: navigator.camera.DestinationType.DATA_URL,
-  //               sourceType: navigator.camera.PictureSourceType.PHOTOLIBRARY,
-  //               encodingType: navigator.camera.EncodingType.JPEG,
-  //               allowEdit: true,
-  //               targetWidth: 500,
-  //               targetHeight: 500,
-  //               saveToPhotoAlbum: false
-	 //    	};
-
-	 //    	$cordovaCamera.getPicture(options).then(function(imageData) {
-	 //        	$scope.user.photoURL = "data:image/jpeg;base64," + imageData;
-	 //        	$scope.photoURL = $scope.user.photoURL; //needed when updating avatar in Edit Profile
-	 //    	}, function(err) {
-	 //        	console.log(err);
-	 //    	});
-	 //    }; 
-
 		// Show info in profile
 
 		$scope.showProfile = function() {

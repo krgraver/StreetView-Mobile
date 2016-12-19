@@ -109,9 +109,9 @@ angular.module('app')
 		// Initialize Views List and allow pull to refresh
 
 		$scope.doRefresh = function() {
-			if (!firebase.auth().currentUser) {
-				$state.go('login');
-			}
+			// if (!firebase.auth().currentUser) {
+			// 	$state.go('login');
+			// }
 
 		    var ref = {};
 
@@ -266,101 +266,107 @@ angular.module('app')
 		
 		$scope.initMap = function() {
 
-			$scope.show($ionicLoading);
+			firebase.auth().onAuthStateChanged(function(user) {
+				if (user) {
+					$scope.show($ionicLoading);
 			
-		    var options = {
-		    	timeout: 10000,
-		    	enableHighAccuracy: true
-		    };
+				    var options = {
+				    	timeout: 10000,
+				    	enableHighAccuracy: true
+				    };
 
-		    function success(position) {
-		    	var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+				    function success(position) {
+				    	var latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
 
-		    	var mapOptions = {
-		      		center: latLng,
-		      		zoom: 15,
-		      		mapTypeId: google.maps.MapTypeId.ROADMAP,
-		      		styles: [
-			            {
-			              	featureType: 'all',
-			              	stylers: [
-			                	{ saturation: -80 }
-			              	]
-			            },{
-			              	featureType: 'road.arterial',
-			              	elementType: 'geometry',
-			              	stylers: [
-			                	{ hue: '#00ffee' },
-			                	{ saturation: 50 }
-			              	]
-			            },{
-			              	featureType: 'poi.business',
-			              	elementType: 'labels',
-			              	stylers: [
-			                	{ visibility: 'off' }
-			              	]
-			            }
-			        ],
-			        disableDefaultUI: true
-		    	};
+				    	var mapOptions = {
+				      		center: latLng,
+				      		zoom: 15,
+				      		mapTypeId: google.maps.MapTypeId.ROADMAP,
+				      		styles: [
+					            {
+					              	featureType: 'all',
+					              	stylers: [
+					                	{ saturation: -80 }
+					              	]
+					            },{
+					              	featureType: 'road.arterial',
+					              	elementType: 'geometry',
+					              	stylers: [
+					                	{ hue: '#00ffee' },
+					                	{ saturation: 50 }
+					              	]
+					            },{
+					              	featureType: 'poi.business',
+					              	elementType: 'labels',
+					              	stylers: [
+					                	{ visibility: 'off' }
+					              	]
+					            }
+					        ],
+					        disableDefaultUI: true
+				    	};
 
-		    	// Draw map around current location
-		    	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
+				    	// Draw map around current location
+				    	var map = new google.maps.Map(document.getElementById("map"), mapOptions);
 
-		    	var image = 'assets/images/me-marker.svg'
-		    	var meMarker = {
-			    	position: latLng,
-			    	map: map,
-			    	icon: image,
-			    	title: 'My Position'
-				};
+				    	var image = 'assets/images/me-marker.svg'
+				    	var meMarker = {
+					    	position: latLng,
+					    	map: map,
+					    	icon: image,
+					    	title: 'My Position'
+						};
 
-				// Place custom marker at current location
-		    	var myPosition = new google.maps.Marker(meMarker);
+						// Place custom marker at current location
+				    	var myPosition = new google.maps.Marker(meMarker);
 
-		    	// Place markers at each view location
-		    	var ref = firebase.database().ref('views/');
+				    	// Place markers at each view location
+				    	var ref = firebase.database().ref('views/');
 
-		    	ref.once('value', function(snapshot) {
-		    		var viewsObject = snapshot.val();
+				    	ref.once('value', function(snapshot) {
+				    		var viewsObject = snapshot.val();
 
-		    		for (view in viewsObject) (function(view) {
+				    		for (view in viewsObject) (function(view) {
 
-		    			// avoids prototype property in viewsObject
-					  	if (viewsObject.hasOwnProperty(view)) {
-					    	var latLng = new google.maps.LatLng(viewsObject[view].viewPosition.latitude, viewsObject[view].viewPosition.longitude);
-							var markerOptions = {
-						    	position: latLng,
-						    	map: map,
-						    	animation: google.maps.Animation.DROP,
-						    	title: 'View Position'
-							};
+				    			// avoids prototype property in viewsObject
+							  	if (viewsObject.hasOwnProperty(view)) {
+							    	var latLng = new google.maps.LatLng(viewsObject[view].viewPosition.latitude, viewsObject[view].viewPosition.longitude);
+									var markerOptions = {
+								    	position: latLng,
+								    	map: map,
+								    	animation: google.maps.Animation.DROP,
+								    	title: 'View Position'
+									};
 
-							var viewMarker = new google.maps.Marker(markerOptions);
-							viewMarker.infowindow = new google.maps.InfoWindow();
+									var viewMarker = new google.maps.Marker(markerOptions);
+									viewMarker.infowindow = new google.maps.InfoWindow();
 
-							viewMarker.addListener('click', function() {
-								this.infowindow.setContent('<img src="' 
-									+ viewsObject[view].photoURL 
-									+ '" style="width:200px; height:200px"><strong style="display:block; width:200px">' 
-									+ viewsObject[view].description 
-									+ '</strong><p>' 
-									+ viewsObject[view].likeCount 
-									+ ' Like(s)</p>');
-								this.infowindow.open(map, viewMarker);
-							});
-					  	}
-					})(view);
+									viewMarker.addListener('click', function() {
+										this.infowindow.setContent('<img src="' 
+											+ viewsObject[view].photoURL 
+											+ '" style="width:200px; height:200px"><strong style="display:block; width:200px">' 
+											+ viewsObject[view].description 
+											+ '</strong><p>' 
+											+ viewsObject[view].likeCount 
+											+ ' Like(s)</p>');
+										this.infowindow.open(map, viewMarker);
+									});
+							  	}
+							})(view);
 
-					$scope.hide($ionicLoading);
-		    	}); 
-		    };
+							$scope.hide($ionicLoading);
+				    	}); 
+				    };
 
-		    function error(err) {
-		    	console.log(err.message);
-		    };
+				    function error(err) {
+				    	console.log(err.message);
+				    };
 
-		    navigator.geolocation.getCurrentPosition(success, error, options);
+				    navigator.geolocation.getCurrentPosition(success, error, options);
+				} else {
+					$state.go('login');
+				}
+			});
 
 		} 
 		
